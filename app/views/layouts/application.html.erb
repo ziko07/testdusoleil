@@ -4,7 +4,12 @@
   <title>SONICTRACKER</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no" note="turns off iphone phone number detection - getting confused with IPs">
-  <%= stylesheet_link_tag :all, :cache => true %>
+  <%#= stylesheet_link_tag :all, :cache => true %>
+  <%= stylesheet_link_tag 'bootstrap.min.css'  %>
+  <%= stylesheet_link_tag 'bootstrap.min.responsive.css'  %>
+  <%= stylesheet_link_tag 'token.input.css'  %>
+  <%= stylesheet_link_tag 'token.input-facebook.css'  %>
+  <%= stylesheet_link_tag 'tweaks.css'  %>
   <%= csrf_meta_tag %>
 </head>
 <body>
