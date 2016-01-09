@@ -5,8 +5,8 @@ class ProxyIp < ActiveRecord::Migration
     add_column :hits, :blocked_proxy_ip, :boolean, :null => false, :default => false
     add_column :stats, :blocked_ip, :integer, :null => false, :default => 0
     add_column :stats, :blocked_proxy_ip, :integer, :null => false, :default => 0
-    execute "update hits set blocked_ip = true where passed = false and analyzed = true"
-    execute "update stats set blocked_ip = analyzed - passed"
+    #execute "update hits set blocked_ip = true where passed = false and analyzed = true"
+    #execute "update stats set blocked_ip = analyzed - passed"
     Rails.cache.clear
   end
 
