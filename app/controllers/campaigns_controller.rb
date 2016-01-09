@@ -98,7 +98,13 @@ class CampaignsController < AdminController
   # PUT /campaigns/1
   def update
     # in case it wasn't set at all
-    
+    if ((params[:ip_time].present?) && params[:browser_time].present? )
+      if(params[:ip_time].downcase == params[:browser_time].downcase)
+        @campaign.update_attributes(match_timezone: true)
+      else
+        @campaign.update_attributes(match_timezone: false)
+      end
+    end
     services = params[:campaign][:mail_services]
     params[:campaign][:mail_services] = services.present? ? services.join(",") : ""
     
