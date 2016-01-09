@@ -1,0 +1,106 @@
+<table class="table table-condensed table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Actions</th>
+      <th>Logged At</th>
+      <% if @show_campaign_id_column %>
+        <th>C<span class="small-caps">ID</span><span class="label label-help" rel="tooltip" data-original-title="C<span class='small-caps'>ID</span> = Campaign ID">?</span></th>
+      <% end %>
+      <th>From IP</th>
+      <th> ISP </th>
+      <th>Referrer</th>
+      <th>Passed</th>
+      <th>Banned</th>
+      <th>Reason Blocked</th>
+      <th>UserAgent</th>
+      <th>UA Hits</th>
+      <th>URL Keyword(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @hits.each do |hit| %>
+    <tr>
+      <td><%= link_to 'Ban IP', (@campaign ? ban_hit_path(hit, :campaign_id => @campaign.id) : ban_hit_path(hit)), :method => :post, :class => "btn btn-tiny" %>
+        <%= hit.id%>
+      </td>
+      <td><%= formatted(hit.created_at) %></td>
+      <% if @show_campaign_id_column %>
+        <td><%= link_to hit.campaign_id, hits_campaign_path(hit.campaign_id) %></td>
+      <% end %>
+      <td><%= hit.ip %></td>
+      
+      <td>
+        <% org_info = hit.isp_organization_location_info %>
+        <% if org_info.present? %>
+          <span class="label label-important" rel="popover" data-original-title="ISP/Organization!" data-content="Campaign ID: <%= hit.campaign_id %>
+            <hr />
+            ISP/Organization: <%= org_info[3] %>
+            <br />
+            Country: <%= org_info[0] %>
+            <br />
+            City: <%= org_info[1] %>
+            <br />
+            State: <%= org_info[2] %>
+            <br />
+            Referrer: <%= hit.referrer_text %>
+            ">!</span>&nbsp;
+        <% else %>
+          <span class="label label-help" rel="popover" data-original-title="ISP/Organization" data-content="Campaign ID: <%= hit.campaign_id %><hr />">?</span>&nbsp;
+        <% end %>
+        
+        <%= hit.blocked_organization? ? raw(label_helper("yes")) : raw(label_helper("no")) %>
+
+      </td>
+      
+      <td>
+        <span class="label label-important" rel="popover" data-original-title="Referrer!" data-content="Campaign ID: <%= hit.campaign_id %>
+          <hr />
+          Referrer: <%= hit.referrer_text %>
+          ">!</span>&nbsp;        
+        <%= hit.blocked_referrer? ? raw(label_helper("yes")) : raw(label_helper("no")) %>
+      </td>
+
+      <td><%= hit.passed ? raw(label_helper("yes")) : raw(label_helper("no",{:type => "important"})) %></td>
+      <td><%= hit.banned? ? raw(label_helper("yes")) : raw(label_helper("no")) %></td>
+      <td>
+        <%= hit.blocked_ip ? raw(label_helper(Hit.human_attribute_name(:blocked_ip),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_proxy_ip ? raw(label_helper(Hit.human_attribute_name(:blocked_proxy_ip),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_organization ? raw(label_helper(Hit.human_attribute_name(:blocked_organization),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_referrer ? raw(label_helper(Hit.human_attribute_name(:blocked_referrer),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_domain ? raw(label_helper(Hit.human_attribute_name(:blocked_domain),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_connection_type ? raw(label_helper(Hit.human_attribute_name(:blocked_connection_type),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_mobile ? raw(label_helper(Hit.human_attribute_name(:blocked_mobile),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_wifi_carrier ? raw(label_helper("Blocked Wifi/Carrier",{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_browser ? raw(label_helper(Hit.human_attribute_name(:blocked_browser),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_geocode ? raw(label_helper(Hit.human_attribute_name(:blocked_geocode),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_user_agent ? raw(label_helper(Hit.human_attribute_name(:blocked_user_agent),{:type => "important"}) + "<br />") : "" %>
+      </td>
+      <td>
+        <% @hit_count = HitCount.includes(:user_agent).where("hit_counts.campaign_id = #{hit.campaign_id}").where("user_agents.user_agent_key = MD5('#{hit.user_agent}')").first %>
+        <% ua = hit.user_agent  %>
+        <% if @hit_count.try(:blocked) %>
+          <span class="label label-important" rel="popover" data-original-title="User Agent Blocked!" data-content="Campaign ID: <%= hit.campaign_id %><br />Blocked At: <%= formatted(@hit_count.try(:blocked_at)) %><hr /><%= ua %>">!</span>&nbsp;
+        <% else %>
+          <span class="label label-help" rel="popover" data-original-title="User Agent Allowed" data-content="Campaign ID: <%= hit.campaign_id %><hr /><%= ua %>">?</span>&nbsp;
+        <% end %>
+        <%= ua.truncate(20) %>
+      </td>
+      <td>
+        <nobr>
+        <%= @hit_count.try(:hits_total) %>&nbsp;
+        <% if @hit_count.try(:hits_total).to_i > 500 %>
+          <span class="label label-important" rel="popover" data-placement="top" data-original-title="Hit Alert!" data-content="There are over 500 hits for this User Agent for this campaign.">!</span>
+          <%= link_to 'more', hit_counts_campaign_path(@hit_count.campaign_id) %>
+          
+        <% elsif @hit_count.try(:hits_total).to_i > 100 %>
+          <span class="label" rel="popover" data-placement="top" data-original-title="Hit Alert!" data-content="There are between 100 and 500 hits for this User Agent for this campaign.">!</span>
+          <%= link_to 'more', hit_counts_campaign_path(@hit_count.campaign_id) %>
+          
+        <% end %>
+        </nobr>
+      </td>
+      <td><%= raw(hit.keywords_formatted) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

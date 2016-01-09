@@ -1,0 +1,4 @@
+if [[ $TERM == 'dumb' ]]
+  then rvm use --create 1.9.2@dusoleil > /dev/null
+  else rvm use --create 1.9.2@dusoleil
+fi

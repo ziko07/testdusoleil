@@ -1,0 +1,53 @@
+
+memcached
+
+campaigns/:sha1 => campaign.attributes
+stats/:campaign_id/:date => stat.attributes
+blockips/:ip/:gen => blockip.attributes
+
+sha > id
+id > values
+
+
+Campaign#after_save
+  cache.stale
+end
+
+every 1.minute
+  all non-archived campaigns, stat for today(+yesterday?)
+    update stat from cache
+  end
+end
+
+every 1.hour
+  poll blocklist
+  write into cache
+  remove old cache
+end
+
+---
+
+class Blockip < ActiveRecord::Base
+end
+
+class BlockipCache
+  @record
+  def self.find(gen, ip)
+    key = "#{self.name}/#{gen}/#{ip}"
+    val = Rails.cache.read(key)
+    if val
+    end
+  end
+
+  
+end
+
+stat
+
+:index => ":name, :age"
+:counters => ":hits"
+
+model_cache :index => name
+model_cache :name, :age
+mcache_counters :hits
+

@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs">
+  <li class="<%= "active" if request.parameters[:action] === 'show' %>">
+    <%= link_to 'Edit', @campaign %>
+  </li>
+  <li class="<%= "active" if request.parameters[:action] === 'stats' %>">
+    <%= link_to 'Daily Stats', stats_campaign_path(@campaign) %>
+  </li>
+  <li class="<%= "active" if request.parameters[:action] === 'hits' %>">
+    <%= link_to 'Latest Hits', hits_campaign_path(@campaign) %>
+  </li>
+  <li class="<%= "active" if request.parameters[:action] === 'hit_counts' %>">
+    <%= link_to 'User Agent Hit Counts', hit_counts_campaign_path(@campaign) %>
+  </li>
+</ul>

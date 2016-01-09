@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  active: false
+  archived: false
+  creator: MyString
+  safe_lp: MyString
+  real_lp: MyString
+  tracker: MyString
+  sha1: MyString
+  url: MyString
+  description: MyString
+  rekey_from_1: MyString
+  rekey_to_1: MyString
+  rekey_from_2: MyString
+  rekey_to_2: MyString
+  start_hour: 1
+  end_hour: 1
+
+two:
+  active: false
+  archived: false
+  creator: MyString
+  safe_lp: MyString
+  real_lp: MyString
+  tracker: MyString
+  sha1: MyString
+  url: MyString
+  description: MyString
+  rekey_from_1: MyString
+  rekey_to_1: MyString
+  rekey_from_2: MyString
+  rekey_to_2: MyString
+  start_hour: 1
+  end_hour: 1

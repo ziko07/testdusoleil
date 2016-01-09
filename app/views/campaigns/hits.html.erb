@@ -1,0 +1,10 @@
+<%= render :partial => "header" %>
+<%= render :partial => "tabs" %>
+
+<h2>
+  Latest Hits
+  <small>
+    Campaign #<%= @campaign.id %>
+  </small>
+</h2>
+<%= render :partial => "hits/list" %>

@@ -1,0 +1,146 @@
+<style>
+  thead .sorting{
+    background: url("/img/sort_both.png") no-repeat scroll right center rgba(0, 0, 0, 0)
+  }
+  thead .sorting_asc{
+    background: url("/img/sort_asc.png") no-repeat scroll right center rgba(0, 0, 0, 0)
+  }
+  thead .sorting_desc{
+    background: url("/img/sort_desc.png") no-repeat scroll right center rgba(0, 0, 0, 0)
+  }
+
+</style>
+<div class="page-header">
+  <h1>
+    Campaigns
+    <small>
+      <%= link_to 'New', new_campaign_path, :class => "btn" %>
+    </small>
+  </h1>
+</div>
+<div class="span no-margin">
+  <div class="alert alert-info alert-small">
+    <span class="label label-success">on</span>&nbsp;Campaign&nbsp;is&nbsp;On 
+    <span class="label">X</span>&nbsp;Not&nbsp;During&nbsp;Day-Part 
+    <span class="label">A(countdown)</span>&nbsp;Autorun&nbsp;Countdown 
+    <span class="label">S</span>&nbsp;Started
+  </div>
+</div>
+<div class="span2" style ="margin-left:76px;">
+  <%= link_to_function "Show/Hide  Filters", '$("#link-controls").toggleClass("hidden")', :class => "btn" %>
+</div>
+
+<div class="span3" style ="margin-left:60px;">
+  <%= form_tag campaigns_path, :method => :get, class: "form-search", id: "search_form" do %>
+      <div class="input-append">
+          <%= text_field_tag :key, params[:key], placeholder: "Search", class: 'input-medium search-query' %>          
+          <button type="submit" class="add-on" style="height:28px;"><i class="icon-search"></i></button>
+      </div>
+      <div>
+        <%= hidden_field_tag :sort_option %>
+      </div>
+  <% end %>
+</div>
+
+<% link_controls_class = "hidden" if ! @filter_on %>
+<%= content_tag :div, :id => "link-controls", :class => link_controls_class do %>
+  <%= form_tag campaigns_path, :method => :get do %>
+    <div class="index-control alert alert-info">
+      <div class="span3">
+        <h3>Creators</h3>
+        <%= select_tag :c, options_for_select([["ALL CREATORS",""]]+Campaign::CREATORS, params[:c]), :multiple => true, :size => 8 %>
+        <% if params[:c] %>
+          <br />
+          <% params[:c].each do |c|%>
+            <span class="label label-info"><%= c.to_s %></span>
+          <% end %>
+        <% else %>
+          <span></span>
+        <% end %>
+        <br />
+        <br />
+        <%= submit_tag "refresh", :name => nil, :class => "btn" %>
+      </div>
+      <div class="span3">
+        <h3>Trackers</h3>
+        <%= select_tag :t, options_for_select([["ALL TRACKERS",""]]+Tracker.all_domains, params[:t]), :multiple => true, :size => 8 %>
+        <% if params[:t] %>
+          <br />
+          <% params[:t].each do |t|%>
+            <span class="label label-info"><%= t.to_s %></span>
+          <% end %>
+        <% else %>
+          <span></span>
+        <% end %>
+      </div>
+      <div class="span3">
+        <h3>Traffic Type</h3>
+        <%= select_tag :tt,  options_for_select([["ALL TRAFFIC TYPES",""]]+Campaign::TRAFFIC_TYPE_VALUES, params[:tt]), :multiple => true, :size => 8 %>
+        <% if params[:tt].present? %>
+          <br />
+          <% params[:tt].each do |tt|%>
+            <span class="label label-info"><%= tt.to_s %></span>
+          <% end %>
+        <% else %>
+          <span></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<table class="table table-bordered table-striped table-condensed" id="campaign_list">
+  <thead>
+    <th style="width:35px;text-align:center;cursor:pointer;" class="<%= params[:sort_option].present? ? params[:sort_option] : 'sorting'%>">ID</th>
+    <th style="width:90px">Actions</th>
+    <th style="width:60px">Status</th>
+    <th style="width:200px">Latest</th>
+    <th style="width:40px">Hits</th>
+    <th style="width:80px"><%= Campaign.human_attribute_name(:creator) %></th>
+    <th style="width:90px"><%= Campaign.human_attribute_name(:tracker) %></th>
+    <th style="width:100px"><nobr>Traffic Type</nobr></th>
+    <th>Landing Page URLs <span class="label label-help" rel="popover" data-original-title="Key" data-content="<span class='label'>R</span> Real Landing Page<br /><span class='label'>S</span> Safe Landing Page" data-html="true">?</span></th>
+  </thead>
+  <tbody>
+  <% @campaigns.each do |campaign| %>
+    <tr>
+      <td style="text-align:center; vertical-align:middle;">
+        <% #raw('%3d' % campaign.id).gsub(/[\s]/,'&nbsp;') %>        
+        <span class="label label-important" rel="popover" style="background-color:transparent;color:black;font-size:14px;font-weight:400;" data-original-title="Campaign Info!" data-content="Campaign ID: <%= campaign.id %>
+          <hr />
+          Description: <%= campaign.description %>
+          <br />
+          ">
+        <%= campaign.id %>
+        </span>
+      </td>
+      <td style="vertical-align:middle;">
+        <nobr>
+        <%= link_to 'Edit', campaign, :class => "btn btn-tiny" %>
+        <%= link_to 'Stats', stats_campaign_path(campaign), :class => "btn btn-tiny" %>
+        </nobr>
+      </td>
+      <td style="vertical-align:middle;">
+        <% if campaign.status == "on" %>
+          <%= link_to 'On', campaign_path(campaign, :campaign => {:status => "on"}), :method => :put, :class => "btn btn-tiny btn-success", "data-rel" => "tooltip", "data-original-title" => "Turn Off?" %>
+        <% else %>
+        <%= link_to 'Off', campaign_path(campaign, :campaign => {:status => "off"}), :method => :put, :class => "btn btn-tiny", "data-rel" => "tooltip", "data-original-title" => "Turn On?" %>
+        <% end %>
+        <br />
+        <nobr> 
+          <%= raw(campaign.formatted_status_flags) %>
+        </nobr>
+      </td>
+      <td style="vertical-align:middle;"><nobr><%= campaign.hits.last ? formatted(campaign.hits.last.created_at) : "None" %></nobr></td>
+      <td style="vertical-align:middle;"><%= link_to "#{campaign.hit_counts_total}", hits_campaign_path(campaign) %></td>      
+      <td style="vertical-align:middle;"><%= campaign.creator %></td>
+      <td style="vertical-align:middle;"><%= campaign.tracker %></td>
+      <td style="vertical-align:middle;"><%= campaign.traffic_type %></td>
+      <td>
+        <span class="label">R</span> <%= campaign.real_lp.truncate(60) %><br />
+        <span class="label">S</span> <%= campaign.safe_lp.truncate(60) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+Showing hits since: <%= @system_hits_first_at ? raw(label_helper(formatted(@system_hits_first_at),{:type => "info"})) : raw(label_helper("None Recorded Yet",{:type => "important"})) %>

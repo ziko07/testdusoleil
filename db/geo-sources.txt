@@ -1,0 +1,7 @@
+http://code.google.com/apis/adwords/docs/appendix/metrocodes.csv
+
+To access the products you purchased, go to http://www.maxmind.com/en/account
+To log in use:
+username:   info@ppc-wizards.com
+password:   gb92oue
+

@@ -1,0 +1,168 @@
+
+storm
+2GB Linux
+ubuntu (12.04)
+8 IPs
+
+------
+
+when public IP appears, add to .ssh/config and dusoleil/config/deploy*
+
+------
+
+# on server
+sudo adduser dusoleil
+sudo adduser dusoleil sudo
+
+# locally 
+ssh t19 mkdir .ssh
+ssh t19 'cat > .ssh/authorized_keys' < .ssh/id_rsa.pub
+ssh t19 'chmod go-wx .ssh .ssh/id_rsa.pub'
+
+
+add to .ssh/authorized_keys
+scp src/dusoleil/doc/dot-gemrc t8:.gemrc
+
+# as root
+echo America/Los_Angeles > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
+apt-get update
+apt-get install curl git-core build-essential autoconf emacs zlib1g-dev zlib1g \
+  libssl-dev libreadline6 libreadline6-dev libsqlite3-dev sqlite3 libcurl4-openssl-dev \
+  libpcre3 libpcre3-dev openssl libyaml-dev \
+  libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion \
+  mysql-server libmysqlclient-dev memcached
+# leave mysql password blank
+
+reboot
+
+git clone git://github.com/sstephenson/ruby-build.git
+cd ruby-build
+./install.sh
+
+ruby-build 1.9.2-p320 ~/local/ruby-1.9.2-p320
+add /home/dusoleil/local/ruby-1.9.2-p320/bin to .bashrc path
+
+gem install bundle
+gem install -v 3.0.7 rails 
+
+------ for rvm ruby
+  curl -L https://get.rvm.io | bash
+  rvm install ruby-1.9.2-p320
+
+  put source rvm at top of bashrc
+  remove bash_login
+------
+
+gem install passenger
+sudo env PATH=$PATH passenger-install-nginx-module
+
+edit /opt/nginx/conf/nginx.conf
+edit passenger_root and passenger_ruby
+
+edit /etc/init/nginx.conf
+sudo initctl {start,stop,restart} nginx
+
+ssh git@git.assembla.com 
+=> yes (to fingerprint)
+
+sudo mkdir -p /var/www/{other,dusoleil2}
+sudo chown dusoleil.dusoleil /var/www/dusoleil2
+
+cap deploy:setup
+
+cp database.yml
+create db
+
+cap deploy:cold
+
+mysqldump -uroot -p dusoleil_production --ignore-table=dusoleil_production.hits --ignore-table=dusoleil_production.hits_archive \
+--ignore-table=dusoleil_production.hits_by_campaign --ignore-table=dusoleil_production.campaigns \
+--ignore-table=dusoleil_production.trackers > dusoleil-2012-07-11.sql
+
+
+
+DONE
+
+===========================
+
+
+
+
+
+storm
+2GB Linux
+latest ubuntu (12.04)
+8 IPs
+
+------
+
+adduser dusoleil
+adduser dusoleil sudo
+
+add to .ssh/authorized_keys
+scp src/dusoleil/doc/dot-gemrc t8:.gemrc
+
+# as root
+echo America/Los_Angeles > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
+apt-get update
+apt-get install curl git-core build-essential autoconf emacs zlib1g-dev zlib1g \
+  libssl-dev libreadline6 libreadline6-dev libsqlite3-dev sqlite3 libcurl4-openssl-dev \
+  libpcre3 libpcre3-dev openssl libyaml-dev \
+  libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion \
+  mysql-server libmysqlclient-dev memcached
+# leave mysql password blank
+
+reboot
+
+git clone git://github.com/sstephenson/ruby-build.git
+cd ruby-build
+./install.sh
+
+ruby-build 1.9.2-p320 ~/local/ruby-1.9.2-p320
+add /home/dusoleil/local/ruby-1.9.2-p320/bin to .bashrc path
+
+gem install bundle
+gem install -v 3.0.7 rails 
+
+------ for rvm ruby
+  curl -L https://get.rvm.io | bash
+  rvm install ruby-1.9.2-p320
+
+  put source rvm at top of bashrc
+  remove bash_login
+------
+
+gem install passenger
+sudo env PATH=$PATH passenger-install-nginx-module
+
+edit /opt/nginx/conf/nginx.conf
+edit passenger_root and passenger_ruby
+
+edit /etc/init/nginx.conf
+sudo initctl {start,stop,restart} nginx
+
+ssh git@git.assembla.com 
+=> yes (to fingerprint)
+
+sudo mkdir -p /var/www/{other,dusoleil2}
+sudo chown dusoleil.dusoleil /var/www/dusoleil2
+
+cap deploy:setup
+
+cp database.yml
+create db
+
+cap deploy:cold
+
+mysqldump -uroot -p dusoleil_production --ignore-table=dusoleil_production.hits --ignore-table=dusoleil_production.hits_archive \
+--ignore-table=dusoleil_production.hits_by_campaign --ignore-table=dusoleil_production.campaigns \
+--ignore-table=dusoleil_production.trackers > dusoleil-2012-07-11.sql
+
+
+
+DONE
+
+===========================
+

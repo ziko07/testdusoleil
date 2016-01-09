@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>
+    All Trackers
+    <small>
+      <%= link_to 'New', new_tracker_path, :class => "btn" %>      
+    </small>
+  </h1>
+</div>
+
+<table class="table table-condensed table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Actions</th>
+      <th>Tracker/Domain (unique)</th>
+      <th>Total Hits</th>
+      <th>IP</th>
+      <th>Campaigns</th>
+      <th>Campaigns by Type</th>
+      <th>Campaigns by Creator</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @trackers.nil? %>
+      <i>none</i>
+    <% else %>
+      <% @trackers.each do |tracker| %>
+        <tr>
+          <td>
+            <%= link_to 'edit', tracker, :class => "btn btn-tiny" %>
+            <%= link_to 'del', tracker, :confirm => "Are you sure?", :method => :delete, :class => "btn btn-tiny" %>
+          </td>
+          <td><strong><%= tracker.domain %></strong></td>
+          <td><%= @total = 0; tracker.campaigns.map{|c| @total += c.hit_counts_total }; @total %></td>
+          <td><%= tracker.ip %></td>
+          <td><%= tracker.usage_by_status_formatted %></td>
+          <td><%= tracker.usage_by_traffic_type_formatted %></td>
+          <td><%= tracker.usage_by_creator_formatted %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

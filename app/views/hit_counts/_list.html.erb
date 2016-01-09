@@ -1,0 +1,52 @@
+<table class="table table-condensed table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Actions</th>
+      <% if @show_campaign_id_column %>
+        <th>C<span class="small-caps">ID</span><span class="label label-help" rel="tooltip" data-original-title="C<span class='small-caps'>ID</span> = Campaign ID">?</span></th>
+      <% end %>
+      <th>User Agent</th>
+      <th>Total Hits</th>
+      <th>Blocked Hits</th>
+      <th>Blocked?</th>
+      <th>Blocked At</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @hit_counts.each do |hc| %>
+    <tr>
+      <td>
+        <%= form_for hc, :url => block_hit_count_path(hc) do |f| %>
+          <%= f.hidden_field :blocked, :value => ( hc.blocked ? 0 : 1 ) %>
+          <%= f.submit ( hc.blocked ? "UnBlock UA" : "Block UA" ), :class => "btn btn-tiny" %>
+        <% end %>
+      </td>
+      <% if @show_campaign_id_column %>
+        <td><%= link_to hc.campaign_id, hit_counts_campaign_path(hc.campaign_id) %></td>
+      <% end %>
+      <td>
+        <% ua = hc.user_agent.user_agent_string %>
+        <% if hc.blocked %>
+          <span class="label label-help label-important" rel="popover" data-original-title="User Agent Blocked!" data-content="Campaign ID: <%= hc.campaign_id %><br />Last Activity: <%= formatted(hc.updated_at) %><br />Blocked At: <%= formatted(hc.blocked_at) %><hr /><%= ua %>">!</span>&nbsp;
+        <% else %>
+          <span class="label label-help" rel="popover" data-original-title="User Agent Allowed" data-content="Campaign ID: <%= hc.campaign_id %><br />Last Activity: <%= formatted(hc.updated_at) %><hr /><%= ua %>">?</span>&nbsp;        
+        <% end %>
+        <%= ua.truncate(40) %>        
+      </td>
+      <td>
+        <nobr>
+        <%= hc.hits_total %>&nbsp;
+        <% if hc.hits_total > 500 %>
+        <span class="label label-important" rel="popover" data-placement="top" data-original-title="Hit Alert!" data-content="There are over 500 hits for this User Agent for this campaign.">!</span>
+        <% elsif hc.hits_total > 100 %>
+        <span class="label" rel="popover" data-placement="top" data-original-title="Hit Alert!" data-content="There are between 100 and 500 hits for this User Agent for this campaign.">!</span>
+        <% end %>
+        </nobr>
+      </td>
+      <td><%= hc.hits_blocked %></td>
+      <td><%= hc.blocked ? raw(label_helper("blocked",{:type => "important"})) : hc.blocked_at ? raw(label_helper("unblocked")) : "" %></td>
+      <td><%= formatted(hc.blocked_at) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

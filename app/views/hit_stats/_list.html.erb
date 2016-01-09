@@ -1,0 +1,43 @@
+
+<div class="span8">
+  <h3>Hits by campaign</h3>
+  <table class="table table-condensed table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>IP</th>
+        <th>Campaign ID</th>
+        <th>Hits</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @hit_stats.each do |hc| %>
+      <tr>
+        <td><%= hc.ip %></td>
+        <td><%= hc.campaign_id %></td>
+        <td><%= hc.hits %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="span6">
+  <div>
+    <h3>Hits by IP</h3>
+    <table class="table table-condensed table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>IP</th>
+        <th>Hits</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @hit_stats_by_ip.each do |hc| %>
+      <tr>
+        <td><%= hc.ip %></td>
+        <td><%= hc.hits %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

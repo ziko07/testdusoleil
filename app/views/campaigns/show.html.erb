@@ -1,0 +1,571 @@
+<%= render :partial => "header" %>
+<%= render :partial => "tabs" if @campaign.id.present? %>
+
+<%= form_for @campaign, :html => {:class => ""} do |f| %>
+  <% if @campaign.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
+      <ul>
+      <% @campaign.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>Overview</h2>
+  
+  <%= f.label :description %>
+  <%= f.text_area :description, :rows => 2, :class => :span8 %>
+  
+  <% if @campaign.new_record? %>
+    <div class="row">
+      <div class="span5">
+        <%= f.label :creator %>
+        <%= f.select :creator, options_for_select(Campaign::CREATORS.map{|user| [user.capitalize, user]}) %>
+        <p class="help-block">Creator is only selectable when creating a new campaign.</p>
+      </div>
+      <div class="span5">
+        <% options = Tracker.domains_with_usage.map{|domain, usage| ["#{domain} (#{usage})", domain]} %>
+        <%= f.label :tracker, "Tracker" %>
+        <%= f.select :tracker, options_for_select(options) %>
+        <p class="help-block">Tracker is only selectable when creating a new campaign.</p>
+      </div>
+    </div>
+    <br />
+  <% end %>
+  
+  <% if @campaign.try(:id) %>
+    <div class="row">
+      <div class="span8">
+      <%= f.label :url, "Placement URL" %>
+      <%= text_field_tag :url, @campaign.url, :class => :span8, :readonly => true %>
+      <%= f.label :script_tag, "Placement Script Tag" %>
+      <%= text_field_tag :url, @campaign.script_tag, :class => :span8, :readonly => true %>
+      </div>
+      <div class="span4">
+        <div class="alert alert-block alert-info">
+          <h3 class="alert-heading">Placement URL/Script Tag</h3>
+          <p>
+            These are assigned by the system when the campaign is created.  They are not editable.
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="span5">
+      <%= f.label :status %>
+      <%= f.select :status, options_for_select(Campaign::STATUS_VALUES, f.object.status ), {:class => :span3 }  %>
+    </div>
+    <div class="span5">
+      <%= f.label :traffic_type %>
+      <%= f.select :traffic_type, options_for_select(Campaign::TRAFFIC_TYPE_VALUES, f.object.traffic_type ) %>
+      <p class="help-block">
+        Traffic Type defines the expected traffic type for the campaign and affects their groupings on the stats and tracker reports.
+      </p>
+    </div>
+  </div>
+
+  <hr />
+  
+  <h2>AutoRun</h2>
+  <div class="row">
+    <div class="span2">
+      <%= f.label :autorun, "Enable?" %>
+      <%= f.check_box :autorun %>
+    </div>
+    <div class="span3">
+      <%= f.label :start_count %>
+      <%= f.text_field :start_count, :class => :span1 %>
+      <p class="help-block">
+        Start Count is the number of hits needed before campaign will be turned on.
+      </p>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">AutoRun</h3>
+        <p>
+          If you enable this feature and add a Start Count number, then when the Campaign is turned on, it will count down as hits come in, pushing all of the first hits to the <strong>Safe Landing Page</strong> while adding the incoming IPs to the Block List, until the Start Count number has been reached.  After that, the campaign will be turned on and the <strong>Real Landing Page</strong> will be offered to Hits that pass all of the tests.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  
+  
+  <h2>Text & Email Notification</h2>
+  <div class="row">
+    <div class="span5">
+      <label class="checkbox inline"><%= f.check_box :email_notification %> Allow </label>
+      <label class="checkbox inline"><%= f.check_box :is_sms %> SMS </label>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <%= hidden_field_tag :hidden_email_notification_reset %>
+      <label class="checkbox inline"><%= check_box_tag :email_notification_reset %> Reset </label>
+      <div class="clearfix"></div>
+      <div class="span5" style="margin-left:0">
+        <div class="span4" style="margin-left:0">
+          <%= f.label "Email" %>
+          <%= f.text_field :email, :class => :span4 %>
+        </div>
+        <div class="span1" style="margin-left:0px;padding-top:30px;">
+          <% if @campaign.email.present?%>
+            <% if @campaign.sent_mail == true %>
+              <span style="background-color:red;border-radius:10px;margin-top:3px;padding:5px;position:absolute;"></span>
+            <% elsif @campaign.email_notification == true %>
+              <span style="background-color:green;border-radius:10px;margin-top:3px;padding:5px;position:absolute;"></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="span5" style="margin-left:0; <%= f.object.is_sms==true ? 'display:inline;' : 'display:none;' %>" id="sms_service_list">
+        <%= f.label "SMS Services" %>
+        <%= f.select :mail_services, grouped_options_for_select(Campaign::SMS_SERVICES), {}, {multiple:true, size:10} %>
+      </div>
+
+      <div class="clearfix"></div>
+
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Text & Email Notification</h3>
+        <p>
+          <strong></strong>
+          ext message or email notification is sent when: 
+          <br/>
+          a. 
+          <br/>
+          When a specific campaign is set to auto run countdown and is turned on. 
+          <br/>
+          b. 
+          <br/>
+          A “ON” campaign receives its first 10 hits. You can input multiple email addresses or phone numbers separated by commas (joking@gmail.com,larryhill99@gmail.com) or 14154389928,3104872278)
+          <br/>
+          c.
+          <br/>
+          Check the “Reset” box and save campaign to reactivate.          
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  
+  <h2>Landing Pages</h2>
+
+  <%= f.label :safe_lp, "Safe Landing Page" %>
+  <%= f.url_field :safe_lp, :class => :span8 %>
+
+  <%= f.label :real_lp, "Real Landing Page" %>
+  <%= f.url_field :real_lp, :class => :span8  %>
+
+  <hr />
+  
+  <h2>Re-keying Parameters</h2>
+  <div class="row">
+    <div class="span5">
+      <strong>1.</strong> From: <%= f.text_field :rekey_from_1, :class => :span1 %> To: <%= f.text_field :rekey_to_1, :class => :span1 %>
+      <br />
+      <strong>2.</strong> From: <%= f.text_field :rekey_from_2, :class => :span1 %> To: <%= f.text_field :rekey_to_2, :class => :span1  %>
+      <br />
+      <strong>3.</strong> From: <%= f.text_field :rekey_from_3, :class => :span1 %> To: <%= f.text_field :rekey_to_3, :class => :span1  %>
+      <br />
+      <strong>4.</strong> From: <%= f.text_field :rekey_from_4, :class => :span1 %> To: <%= f.text_field :rekey_to_4, :class => :span1  %>
+      <br />
+      <strong>5.</strong> From: <%= f.text_field :rekey_from_5, :class => :span1 %> To: <%= f.text_field :rekey_to_5, :class => :span1  %>
+      <br />
+      <strong>6.</strong> From: <%= f.text_field :rekey_from_6, :class => :span1 %> To: <%= f.text_field :rekey_to_6, :class => :span1  %>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Re-Keying Parameters</h3>
+        <p>
+          Parameters defined in the <strong>From</strong> box will be transformed into what's entered into the <strong>To</strong> box as the hit passes through the system.  The resulting <strong>parameters</strong> will then be appended to the <strong>Real Landing Page</strong>.
+        </p>
+        <hr />
+        <h3 class="alert-heading">Example</h3>
+        <div class="row">
+          <div class="span2"><strong>Requested:</strong></div>
+          <div class="span4">?h=751559df6bd241b9a186b4a9548073e04cc2d1f6&<strong>kw=msn</strong></div>
+        </div>
+        <div class="row">
+          <div class="span2"><strong>Real LP:</strong></div>
+          <div class="span4">http://tax-express-refund.info/refund/tax.html?</div>
+        </div>
+        <div class="row">
+          <div class="span2"><strong>Re-Key:</strong></div>
+          <div class="span4">From: <strong>kw</strong> To: <strong>sid</strong></div>
+        </div>
+        <div class="row">
+          <div class="span2"><strong>Actual Real LP:</strong></div>
+          <div class="span4">http://tax-express-refund.info/refund/tax.html?<strong>sid=msn</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Day-Part Controls</h2>
+  <div class="row">
+    <div class="span5">
+        <strong>1.</strong> Start Hour: <%= f.text_field :start_hour_1, :class => :span1 %> End Hour: <%= f.text_field :end_hour_1, :class => :span1 %>
+        <br />
+        <strong>2.</strong> Start Hour: <%= f.text_field :start_hour_2, :class => :span1 %> End Hour: <%= f.text_field :end_hour_2, :class => :span1 %>
+        <br />
+        <p class="help-block">Only enter single digit numbers for the Start and End Hours of each Day Part.</p>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Day-Part Controls</h3>
+        <p>
+          You may define two time windows during which the campaign will be open.  Enter only the hour (1 - 24) for Start and End Times.  The End hour must be greater than the Start hour.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Filter By Referring Domain</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :filter_domain_allow %> Allow </label>
+          <label class="checkbox inline"><%= f.check_box :filter_domain_facebook %> Facebook</label>
+          <label class="checkbox inline"><%= f.check_box :filter_domain_google %> Google</label>
+          <label class="checkbox inline"><%= f.check_box :filter_domain_msn %> MSN</label>
+        </div>
+        <div class="controls">          
+          <label class="checkbox inline" style="margin-left: 63px;"><%= f.check_box :filter_broad_match %> Broad Match </label>
+          <label class="checkbox inline"><%= f.check_box :filter_exact_match %> Exact Match </label>
+        </div>
+      </div>
+      <%= f.label :filter_domain_other, "Other" %>
+      <%= f.text_field :filter_domain_other, :class => :span5  %>
+      <p class="help-block">
+         Enter full domain names only and use commas to separate.<br />
+         <strong>Examples:</strong> google.com, facebook.com, yahoo.com<br />
+         <em>(Do not include http:// or https:// or www)</em>
+      </p>
+      <hr />
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :filter_blank_referrer %> Block blank ('/') referers</label>
+        </div>
+      </div>
+      <p class="help-block">
+         <strong>Warning:</strong> Blocking the '/' referrer string is not recommended</em>
+      </p>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Filter by Referring Domain</h3>
+        <p>
+          If any of the domain groups are checked or 
+          any domains are entered into the <strong>other</strong> field, 
+          then matching referring domains will be blocked.
+          <br/>
+          Enable "Allow" to pass referring domains thru.
+          <br>
+          Enable "Broad Match" to match everything that has the root domain included in referrer.
+        </p>
+
+        <hr />
+        <div class="row">
+          <div class="span7">
+            <p>
+              Enable "Exact Match" for specific referring domain string to be matched.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span2">Facebook:</div>
+          <div class="span4"><%= Campaign::FACEBOOK_DOMAINS.join(", ") %></div>
+        </div>
+        <div class="row">
+          <div class="span2">Google:</div>
+          <div class="span4"><%= Campaign::GOOGLE_DOMAINS.join(", ") %></div>
+        </div>
+        <div class="row">
+          <div class="span2">MSN:</div>
+          <div class="span4"><%= Campaign::MSN_DOMAINS.join(", ") %></div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+  <hr />
+
+  <h2>Filter By IP Organization</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :filter_organization_allow %> Allow</label>
+          <label class="checkbox inline"><%= f.check_box :filter_organization_facebook %> Facebook</label>
+          <label class="checkbox inline"><%= f.check_box :filter_organization_google %> Google</label>
+          <label class="checkbox inline"><%= f.check_box :filter_organization_msn %> MSN</label>
+        </div>
+      </div>
+      <%= f.label :filter_organization_other, "Other" %>
+      <%= f.text_field :filter_organization_other, :class => :span5  %>
+      <p class="help-block">
+         Enter full organizations only and use commas to separate.<br />
+         <strong>Examples:</strong> IBM, BML Media
+      </p>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Filter by IP Organization</h3>
+        <p>
+          If any ISP or any organization is entered into the <strong>other</strong> field they will be blocked, 
+          unless you select “allow” then these ISP and organizations will be passed.
+        </p>
+      </div>
+    </div>  
+  </div>
+
+  <hr />
+
+  <h2>Filter by Mobile</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :mobile_filter_allow %> Allow</label>
+          <label class="checkbox inline"><%= f.check_box :mobile_filter_mobile %> Mobile</label>
+          <label class="checkbox inline"><%= f.check_box :mobile_filter_android %> Android</label>
+          <label class="checkbox inline"><%= f.check_box :mobile_filter_ios %> iOS</label>
+        </div>
+      </div>      
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Mobile</h3>
+        <p>
+          If the "Allow" checkbox is checked, then the selected user agent types will be passed through. If it is unchecked, 
+          then the selected user agent types will be blocked.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Filter by Connection Types</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :connection_type_filter_allow %> Allow</label>          
+          <label class="checkbox inline"><%= f.check_box :connection_type_filter_dial_up %> Dial up</label>          
+          <label class="checkbox inline"><%= f.check_box :connection_type_filter_cellular %> Cellular</label>
+          <label class="checkbox inline"><%= f.check_box :connection_type_filter_cable_dsl %> Cable/DSL</label>
+          <label class="checkbox inline"><%= f.check_box :connection_type_filter_corporate %> Corporate</label>
+        </div>
+      </div>      
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Connection Type</h3>
+        <p>
+          Determine the visitor click by connection type.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Filter by Carrier</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_allow %> Allow</label>          
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_at_t %> At&t</label>          
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_sprint %> Sprint</label>
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_verizon %> Verizon</label>
+          <br>
+          <label class="checkbox inline" style="margin-left: 63px;"><%= f.check_box :wifi_filter_t_mobile %> T-mobile</label>
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_boost_mobile %> Boost Mobile</label>
+          <label class="checkbox inline"><%= f.check_box :wifi_filter_metro_pcs %> Metro PCS</label>
+        </div>
+      </div>      
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Carrier</h3>
+        <p>
+          Determine the visitor click by specific cellular ISP.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Filter by Browser</h2>
+  <div class="row">
+    <div class="span5">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline"><%= f.check_box :browser_filter_allow %> Allow</label>
+          <label class="checkbox inline"><%= f.check_box :browser_filter_firefox %> Firefox</label>
+          <label class="checkbox inline"><%= f.check_box :browser_filter_safari %> Safari</label>          
+          <label class="checkbox inline"><%= f.check_box :browser_filter_chrome %> Chrome</label>
+          <br>
+          <label class="checkbox inline" style="margin-left: 63px;"><%= f.check_box :browser_filter_opera %> Opera</label>
+          <label class="checkbox inline"><%= f.check_box :browser_filter_internet_explorer %> Internet Explorer</label>          
+        </div>
+      </div>      
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Browser</h3>
+        <p>
+          Determine the visitor click by browser type.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <h2>
+    Geo Metro Areas
+    <small>
+      <%= link_to_function "show more/less", '$("#geo-inputs-not-recent").toggleClass("hidden")', :class => "btn" %>
+    </small>
+  </h2>
+  <div class="row">
+    <div class="span5">
+      <div id="geo-inputs">
+        <br>
+        <%= f.check_box :geocode_metro_code_list_allow %> Allow
+        <br><br>
+        <% if @metro_codes_recent.present? %>
+          <% @metro_codes_recent.each do |metro_code| %>
+            <%= check_box_tag "campaign[metro_codes][#{metro_code.id}]", "1", @campaign.metro_codes[metro_code.id] %> 
+            <%= metro_code.metro_name %><br>
+          <% end %>
+        <% end %>
+        <div id="geo-inputs-not-recent" class="hidden">
+          <% if @metro_codes_not_recent.present? %>
+            <% @metro_codes_not_recent.each do |metro_code| %>
+              <%= check_box_tag "campaign[metro_codes][#{metro_code.id}]", "1", @campaign.metro_codes[metro_code.id] %> 
+              <%= metro_code.metro_name %><br>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Metro Areas</h3>
+        <p>
+          If the "Allow" checkbox is checked, then the listed metro areas will be passed through. If it is unchecked, 
+          then the listed metro areas will be blocked.
+        </p>
+      </div>
+    </div>  
+  </div>
+  <br />
+  <hr />
+
+  <h2>
+    Geo Countries
+  </h2>
+  <div class="row">
+    <div class="span5">
+      <div id="geo-inputs2">
+        <br>
+        <%= f.check_box :geocode_country_list_allow %> Allow
+        <br><br>
+        <%= f.label :geocode_country_list, 'Country list' %>
+        <%= f.text_field :geocode_country_list %> 
+      </div>
+    </div>
+    <div class="span7">
+      <div class="alert alert-block alert-info">
+        <h3 class="alert-heading">Country List</h3>
+        <p>
+          If the "Allow" checkbox is checked, then the listed countries will be passed through. If it is unchecked, 
+          then the listed countries will be blocked.
+        </p>
+        <p>
+          The country list must be a comma separated list of two letter country codes, without spaces or other punctuation. 
+          For example: "IN,DE" to indicate India and Germany" or "US,CA" to indicate United States and Canada. The list of 
+          two letter country codes can be found
+          <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">here</a> on Wikipedia.
+        </p>
+      </div>
+    </div>  
+  </div>
+  <br />
+  <hr />
+
+
+    <h2>
+      Time Zone
+    </h2>
+    <div class="row">
+      <div class="span5">
+        <div id="geo-inputs2">
+          <h3><span>Your Browser Timezone:  <%=  cookies['timezone'] %> </span></h3>
+          <br>
+          <h3><span>Your Ip Timezone: <%= @ip_timezone %></span></h3>
+          <br>
+          <%= hidden_field_tag :browser_time, value: cookies['timezone'] %>
+          <%= hidden_field_tag :ip_time, value: @ip_timezone %>
+        </div>
+      </div>
+      <div class="span7">
+        <div class="alert alert-block alert-info">
+          <h3 class="alert-heading">Time Zone</h3>
+          <p>
+            If The your Browser time zone and Ip time zone does not match then it will always go to safe landing page.
+          </p>
+        </div>
+      </div>
+    </div>
+    <br />
+    <hr />
+
+  <div class="actions">
+    <%= f.submit 'Save Changes', :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+<%= javascript_include_tag "jquery-1.10.2.min.js" %>
+<%= javascript_include_tag "jquery-ui.min.js" %>
+<%= javascript_include_tag "jquery.tokeninput.js" %>
+
+<script>  
+  var url         = "<%= autocomplete_campaigns_path %>";  
+  var org_data    = jQuery.parseJSON('<%= @org_other_data.to_json.html_safe %>');
+  var domain_data = jQuery.parseJSON('<%= @domain_other_data.to_json.html_safe %>');
+
+  $("#campaign_filter_organization_other").tokenInput(url,{
+    theme: "facebook",
+    prePopulate: org_data
+  });
+  
+  // $("#campaign_filter_domain_other").tokenInput(url,{
+  //   theme: "facebook",
+  //   prePopulate: domain_data
+  // });
+
+</script> 

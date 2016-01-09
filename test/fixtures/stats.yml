@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  run_at: 2011-02-13
+  hits: 1
+  analyzed: 1
+  passed: 1
+  campaign: 
+
+two:
+  run_at: 2011-02-13
+  hits: 1
+  analyzed: 1
+  passed: 1
+  campaign: 

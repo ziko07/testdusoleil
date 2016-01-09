@@ -1,0 +1,169 @@
+Mac OS X
+
+Xcode or alternative
+home brew  (can run brew doctor to see what is missing)
+git
+assembla
+ssh config  
+<-- onetime:::
+at terminal type ssh-keygen.  Take generated key and copied to assembla shared workspace keygen area
+generated in default area /Users/shahzadkhan/.ssh/id_rsa  it created dir /Users/shahzadkhan/.ssh
+did not use any passphrases and it saved to 
+Your identification has been saved in /Users/shahzadkhan/.ssh/id_rsa.
+Your public key has been saved in /Users/shahzadkhan/.ssh/id_rsa.pub.
+/Users/shahzadkhan/.ssh/id_rsa
+to see the key created it is cat .ssh/id_rsa.pub)
+-->
+run git to get the latest code from assemba repository
+at command line: git clone git@git.assembla.com:dusoleil.git
+
+# set up the server on hosted env.
+storm
+2GB Linux
+latest ubuntu (12.04)
+hostname (increment) t9.kevinhart.com
+for user type in root and give the root user password
+8 IPs
+create the server and let it run while configures.
+Capture the IP address created in this case 
+64.91.234.138
+------
+
+seperate terminal (ssh to the new server as root, not as current userr, later can change my local ssh config to automatically do this)
+<-- e.g in this case ssh root@64.91.234.138 with password we have -->
+adduser dusoleil  # for convention using same password for every user and leave all fields blank -->
+adduser dusoleil sudo  # give sudo permissions to the deployment user
+
+# Users and permissions
+# Now log out as root user and log back in as the deployment user:
+exit
+ssh root@64.91.234.138  # and use same user password
+add to .ssh/authorized_keys  and allow ONLY read write permissions
+<--
+in deployment user home dir we make the .ssh dir and add the authorized_keys file
+mkdir .ssh
+cd .ssh/
+cat > authorized_keys
+now cut and paste the key that was generated earlier and shared into assmebla and hit return
+next to close cat hit CTRL-d -- NOT AppleCommand but actually control
+chmod go-rwx . authorized_keys  #note this allows all group mimus the rwx for current dir and file
+-->
+
+
+# Now we want to copy the gemrc from my local so use ssh copy command scp
+# logout or do from a differnt (local machine terminal):
+# generic idea scp src/dusoleil/doc/dot-gemrc t8:.gemrc
+# in this particaluar case: - note must login as deploy user and :. means to put at local directory
+# this step is just removing the gem docs from server b/c not needed there
+scp doc/dot-gemrc dusoleil@64.91.234.138:./.gemrc
+
+# as root
+
+# Following will copy LA timezone into local
+# will make non-interactive mode on package so that that script may run
+# apt and all this is for Ubuntu to update the packages
+# final call is indented (one statement) and actually installs all the necessary components
+# RUN as root --- login as deploy user and then use sudo -s
+echo America/Los_Angeles > /etc/timezone
+# type of commit for last statement/command
+dpkg-reconfigure -f noninteractive tzdata   
+# get metadata of available compoents 
+apt-get update
+# upgrades all software packages
+apt-get dist-upgrade
+# choose default action on grub - keep current
+reboot
+apt-get install curl git-core build-essential autoconf emacs zlib1g-dev zlib1g \
+  libssl-dev libreadline6 libreadline6-dev libsqlite3-dev sqlite3 libcurl4-openssl-dev \
+  libpcre3 libpcre3-dev openssl libyaml-dev \
+  libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion \
+  memcached mysql-server libmysqlclient-dev
+# last commmand actually installes packages needed
+# leave mysql password blank
+
+Disable root ssh access by editing /etc/ssh/sshd_config to contain:
+PermitRootLogin no
+
+# command for shutdown sudo shutdown -r now
+reboot
+
+# as root
+git clone git://github.com/sstephenson/ruby-build.git
+cd ruby-build
+./install.sh
+
+# build ruby
+# as deploy user and below gems etc.
+ruby-build 1.9.2-p320 ~/local/ruby-1.9.2-p320
+#add /home/dusoleil/local/ruby-1.9.2-p320/bin to .bashrc path  # nano decent editor
+# can do above as open .bashrc with nano and add below line and save:
+export PATH=/home/dusoleil/local/ruby-1.9.2-p320/bin:$PATH
+# --note: we had to do this on local machine (one time setup) but there was no .bashrc  . We
+# --created this in user home dir and for .bash_profile (might be redundant but ok)
+# next log out to make sure it takes effect and log back in as deploy user
+
+# installing gems and the bundle is used for capistrano
+gem install bundler # note we have to do this (one time for local machine)
+gem install -v 3.0.7 rails 
+#(not necessary on local b/c last cmd got rails but on local need
+# on local machine onetime with cmd brew install memcached)
+
+# Install passenger and then set env var for nginx install
+gem install passenger
+sudo env PATH=$PATH passenger-install-nginx-module
+# all defaults are ok and blanks
+
+# as root
+# edit /opt/nginx/conf/nginx.conf  make it look like conf file from git nginx.cong
+# edit passenger_root and passenger_ruby (make sure version and package numbers correct)
+cd /opt/nginx/conf/
+rm nginx.conf
+nano nginx.conf # paste in contents from opt-nginx-conf-nginx.conf
+
+
+# create /etc/init/nginx.conf
+cd /etc/init
+nano nginx.conf # paste in contents from opt-nginx-conf-nginx.conf
+sudo initctl {start,stop,restart} nginx
+
+# as deploy user
+ssh git@git.assembla.com 
+=> yes (to fingerprint)  # will get a permission denied message but ok, point was just to touch
+
+# as root
+# makes both these paths/directories
+sudo mkdir -p /var/www/{other,dusoleil2}
+# changes ownership to dusoleil user and group
+sudo chown dusoleil.dusoleil /var/www/dusoleil2
+
+# do from local
+# must update configs to correct servers
+# files are production-t8.rb (in deploy dir) and deploy.rb (in locales dir)
+cap production-t9 deploy:setup
+cap production-t9 deploy:update_code  # this is my current failure point
+
+# from local
+scp config/database.yml-orig t9:/var/www/dusoleil2/shared/config/database.yml
+
+mysqladmin -uroot  create dusoleil_production
+
+# from local
+cap production-t9 deploy:migrations
+cap deploy:cold
+
+# from old server as deploy user
+# import from db/import_ips
+# load geocode
+RAILS_ENV=production ./script/rails runner GeocodeBlock.load_csv 
+# load isp
+mysql -uroot dusoleil_production < IPLocationDB.sql
+
+
+# setup cronjobs
+bundle exec whenever
+# edit release/xxx -> current
+# add 'bundle exec'
+initctl start nginx
+
+DONE
+

@@ -1,0 +1,54 @@
+<%= render :partial => "header" %>
+<%= render :partial => "tabs" %>
+
+<h2>
+  Daily Stats
+  <small>
+  </small>
+</h2>
+<br />
+<%= content_tag :form, :action => stats_campaign_path(@campaign), :method => "get" do %>
+  Days: <%= text_field_tag :days, @days, :size => 10 %>
+  <%= submit_tag 'view', :name => nil %>
+<% end %>
+<p/>
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Hits</th>
+      <th>Analyzed</th>
+      <th>Passed</th>
+      <th>Rejected</th>
+      <th>IP</th>
+      <th style="width: 100px;">ISP/Organization</th>
+      <th>Referrer</th>
+      <th>Proxy IP</th>
+      <th>Mobile</th>
+      <th style="width: 76px;">Wifi/Carrier</th>
+      <th style="width: 76px;">Browser</th>
+      <th>Domain</th>
+      <th>Geo</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @stats.each do |stat| %>
+  <tr>
+    <td><%= formatted(stat.run_at) %></td>
+    <td><%= stat.hits %></td>
+    <td><%= stat.analyzed %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.passed_pct, :precision => 1) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.rejected_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_ip_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_isp_organization_pct, :precision => 2) %></td>    
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_referrer_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_proxy_ip_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_mobile_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_wifi_carrier_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_browser_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_domain_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_geocode_pct, :precision => 2) %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

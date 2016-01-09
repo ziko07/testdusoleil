@@ -1,0 +1,210 @@
+<div class="page-header">
+  <h1>
+    System Configuration
+    <small>
+    </small>
+  </h1>
+</div>
+
+<%= form_for(@sysconfig, :url => sysconfigs_path) do |f| %>
+  <% if @sysconfig.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sysconfig.errors.count, "error") %> prohibited this sysconfig from being saved:</h2>
+
+      <ul>
+      <% @sysconfig.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Settings</legend>
+    
+    <%= f.label :hit_cache_timeout %>
+    <%= f.text_field :hit_cache_timeout, :class => :span2 %>
+    
+    <%= f.label :admin_password %>
+    <%= f.password_field :admin_password %>
+  </fieldset>
+
+    <%= f.submit 'save', :class => "btn btn-primary" %>
+<% end %>
+
+  <legend>Actions</legend>
+    <h3>Unban your current IP: <%= request.ip %></h3>
+    <%= button_to 'unban', unban_me_sysconfigs_path, :class => "btn" %>
+
+    <h3>Reset the hit cache</h3>
+    <%= button_to 'reset', reset_cache_sysconfigs_path, :class => "btn"  %>
+    <hr>
+    
+    <div class="row">
+      <h3 style="margin-left:30px;"> IP and User Agent System Wide Filter</h3>
+      <div class="span6">        
+        <%= form_for(:ip_list_form, :url => upload_ip_list_sysconfigs_path, remote: true, html:{multipart: true, id:"upload_ip_form"}) do |f| %>
+          <div class="span1" style="margin-left: 0px; padding-top: 5px;">
+            <div class="checkbox">
+              <label for="user_ban_ip">
+                <input name="user[ban_ip]" type="hidden" value="0">
+                <input id="user_ban_ip" name="user[ban_ip]" type="checkbox" value="1"> UnBann
+              </label>
+            </div>
+          </div>
+
+          <div class="span2" style="margin-left:10px;">
+            <%= text_field_tag :ban_ip, nil, placeholder: "Ban IP", class:"span2", style:"" %>
+          </div>
+
+          <div class="span2" style="margin-left:20px;">
+            <span class="btn btn-default btn-file">
+              Browse .CSV or .TXT
+              <%= file_field_tag :ip_list %>
+            </span>
+          </div>
+          <%= f.submit 'Submit', :class => "btn btn-default", style:"float:right;", id:"ip_list_submit" %> 
+           
+        <% end %>
+        
+        <div class="clearfix"></div>
+        
+        <%= form_for(:ip_list_form, :url => search_ip_sysconfigs_path, html:{id:"search_ip_form", method: :get}) do |f| %>
+          <div class="control-group">
+             <div class="controls">
+               <div class="input-append">
+                <%= text_field_tag :search_ip, params[:search_ip], class:"span5" %>
+                <%= submit_tag 'Search IP', :class => "btn btn-default", id:"search_ip_submit" %>
+              </div>
+             </div>
+           </div>
+        <% end %>
+      
+        <div class="clearfix"></div>
+        <table class="table table-bordered table-striped table-condensed" id="ban_ip_table">
+          <thead>
+            <th>No</th>
+            <th>IP Address</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+            <% @hit_ips.each_with_index do |ip, index|%>
+              <tr>
+                <td><%= index+1 %></td>
+                <td><%= ip.ip %></td>
+                <td><%= Blockip.blocked?(ip.ip) == false ? "UnBanned" : "Banned" %>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="3">
+                <%= will_paginate @hit_ips, param_name: 'ip_page' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="span6">        
+        <%= form_for(:ip_list_form, :url => upload_agent_list_sysconfigs_path, remote: true, html:{multipart: true, id:"agent_upload_form"}) do |f| %>
+
+           <div class="span1" style="margin-left: 0px; padding-top: 5px;">
+            <div class="checkbox">
+              <label for="user_ban_agent">
+                <input name="user[ban_agent]" type="hidden" value="0">
+                <input id="user_ban_agent" name="user[ban_agent]" type="checkbox" value="1"> UnBann
+              </label>
+            </div>
+          </div>
+
+          <div class="span3" style="margin-left:10px;">
+            <%= text_field_tag :ban_agent, nil, placeholder: "Ban UserAgent", class:"span3", style:"" %>
+          </div>
+
+          <div class="span1" style="margin-left:10px;width:146px;">
+            <span class="btn btn-default btn-file">
+              Browse .CSV or .TXT
+              <%= file_field_tag :agent_list %>
+            </span>
+          </div>
+          <%= f.submit 'Submit', :class => "btn btn-default", style:"float:right;", id:"agent_list_submit" %> 
+
+
+        <% end %>
+        
+        <div class="clearfix"></div>
+
+        <%= form_for(:ip_list_form, :url => search_ip_sysconfigs_path, html:{id:"search_ip_form", method: :get}) do |f| %>
+          <div class="control-group">
+             <div class="controls">
+               <div class="input-append">
+                <%= text_field_tag :search_agent, params[:search_agent], class:"span2", style:"width:430px;" %>
+                <%= submit_tag 'Search UserAgent', :class => "btn btn-default", id:"search_useragent_submit" %>
+              </div>
+             </div>
+           </div>
+        <% end %>
+
+        <div class="clearfix"></div>
+
+
+        <table class="table table-bordered table-striped table-condensed" id="ban_agent_table">
+          <thead>
+            <th>No</th>
+            <th>User Agent</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+            <% @user_agents.each_with_index do |ua, index|%>
+              <tr>
+                <td><%= index+1%></td>
+                <td><%= ua.user_agent%></td>
+                <td><%= Blockip.blocked?(ua.ip) == false ? "UnBanned" : "Banned" %>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="3">
+                <%= will_paginate @user_agents, param_name: 'agent_page' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+    <%= form_for(@sysconfig, :url => sync_data_sysconfigs_path) do |f| %>
+      <h3>Sync Data</h3>
+       <div class="control-group">
+         <div class="controls">
+           <label class="checkbox inline"><%= check_box_tag(:sync_user_agents) %> User Agents</label>
+           <label class="checkbox inline"><%= check_box_tag(:sync_hit_counts) %> Hit Counts</label>
+         </div>
+       </div>
+       <%= f.submit 'Save', :class => "btn btn-danger" %>
+      <p class="help-block">If you sync data, it may take a few minutes and slow the system down.</p>
+  <% end %>
+
+<style type="text/css">
+  form{
+    margin-bottom: 0px;
+  }
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+  }
+</style>

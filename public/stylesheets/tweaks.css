@@ -1,0 +1,32 @@
+body{padding-top:40px;padding-bottom:40px;}                   /* needed for fixed-nav-bar spacing,  bottom gives space on screen. */
+.hidden {display: none; }                                     /* used with Hit Filters */
+.index-control { display: inline-block; margin-right: 15px;}  /* part of Hit Filters */
+
+.popover-wide > .popover-inner { width:400px;}        /* makes certain popovers bigger */
+.label {white-space:nowrap;}                          /* for hits page - it was wrapping the blocked reason */
+.label.label-help {margin:1px;padding:1px 2px;}    /* custom, smaller label for help tooltips */
+.popover hr {margin:4px 0px;}                         /* used in popovers to keep margins for hr tigher */
+.alert-small {font-size:11px;padding:4px 8px;}        /* this is used to tighten up alert box for Campaign Index Status Key */
+.btn.btn-tiny {font-size:10px;padding:1px 4px;}        /* used for most actions in reports to keep row height to a minimum */
+td form, td .btn {margin-bottom:0px;}                 /* this helps keep the row height down when using buttons in reports */ 
+.small-caps{font-variant:small-caps;font-size:.8em;vertical-align:text-bottom;}  /* used on top of Hits page to style CID */
+.no-margin {margin:0px;}                              /* removes margins. used on Campaigns to push Status Key Div left */
+.pointer {cursor:pointer;}                            /* used to attach pointer to cursor via application.js for tooltips and popovers */
+
+
+@media (max-width:980px) {
+  body{padding-top:0px;}                              /* this keeps the top nav bar at the top once the screen is below 980 pixels wide to support collapsing menus */
+  .page-header {margin:8px 8px;}                      /* helps to tighten up top of page in this state */
+}
+
+@media (max-width: 480px) {
+  body{padding-top:0px;font-size:11px;}                                     /* needed to keep menu at top */
+  .alert-block p {font-size:11px;}                                          /* making fonts smaller */
+  h4 small,h3 small,h2 small,h1 small{font-size:11px;}                      /* making fonts smaller */
+  h1{font-size:22px;}                                                       /* making fonts smaller */
+  h2{font-size:20px;}                                                       /* making fonts smaller */
+  h3{font-size:18px;}                                                       /* making fonts smaller */
+  span.label{font-size:9px;}                                                /* making fonts smaller */
+  .navbar .nav > li > a, .navbar .dropdown-menu a {padding:2px 4px;}        /* tightens up top collapsing nav */
+  .page-header {margin:4px 4px;}                                            /* helps to tighten up top of page in this state */
+}

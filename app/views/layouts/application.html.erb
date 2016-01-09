@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SONICTRACKER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no" note="turns off iphone phone number detection - getting confused with IPs">
+  <%= stylesheet_link_tag :all, :cache => true %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <%= link_to 'SONICTRACKER', campaigns_path, :class => "brand" %>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="dropdown <%= (controller.controller_name == 'campaigns' ? 'active' : '') %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'New Campaign', new_campaign_path %>
+                </li>
+                <li>
+                <%= link_to 'All Campaigns', campaigns_path %>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown <%= (controller.controller_name == 'trackers' ? 'active' : '') %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trackers <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'New Tracker', new_tracker_path %>
+                </li>
+                <li>
+                  <%= link_to 'All Trackers', trackers_path, :class => (controller.controller_name == "trackers" ? "active" : "") %>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown <%= ( (controller.controller_name ==  'hits' || controller.controller_name == 'hit_counts' ) ? 'active' : '') %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hits <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Latest Hits', hits_path %></li>
+                <li><%= link_to 'Hit Counts By User Agent', hit_counts_path %></li>
+                <li><%= link_to 'Hit Counts By IP', hit_stats_path %></li>
+              </ul>
+            </li>
+            <li>
+              <%= link_to 'System Configuration', sysconfigs_path, :class => (controller.controller_name == "sysconfigs" ? "active" : "") %>
+            </li>
+          </ul>     
+          <div class="nav pull-right">
+            <span class="label label-info ">Current time: <%= formatted(DateTime.now) %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if alert %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">×</a>
+      <%= raw(alert) %>
+    </div>
+  <% end %>
+  <% if notice %>
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <%= raw(notice) %>
+    </div>
+  <% end %>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
+
+<%= javascript_include_tag "jquery.min.js" %>
+<%= javascript_include_tag "jquery_ujs.js" %>
+<%= javascript_include_tag "bootstrap.min.js" %>
+<%= javascript_include_tag "application.js" %>
+<%= javascript_include_tag "jquery.cookie.js" %>
+<%= javascript_include_tag "detect_timezone.js" %>
+<%= javascript_include_tag "jquery.detect_timezone.js" %>
+
+<script>
+  // $("#ip_list_submit").attr("disabled", "disabled");
+  // $("#agent_list_submit").attr("disabled", "disabled");
+  
+  $("#ip_list").change(function(){
+    $("#ip_list").parent().css("color","blue");
+    $("#ip_list_submit").removeAttr("disabled");
+  });
+  $("#agent_list").change(function(){
+    $("#agent_list").parent().css("color","blue");
+    $("#agent_list_submit").removeAttr("disabled");
+  });
+
+  $("#user_ban_ip").change(function(){
+    if($("#user_ban_ip").is(":checked")){
+      $("#ban_ip").prop("placeholder","UnBan Ip")
+    }else{
+      $("#ban_ip").prop("placeholder","Ban Ip")
+    }
+  });
+
+  $("#user_ban_agent").change(function(){    
+    if($("#user_ban_agent").is(":checked")){
+      $("#ban_agent").prop("placeholder","UnBan UserAgent")
+    }else{
+      $("#ban_agent").prop("placeholder","Ban UserAgent")
+    }
+  });
+  
+
+  // $("#ban_ip_form").on('ajax:success',function(event, data, status, xhr){
+  //   $("#ban_ip_table tr").each(function(){
+  //     if($(this).find("td:eq(1)").html()==data.sucess.ip){
+  //       $(this).find("td:eq(2)").html("Banned")
+  //     }
+  //   });
+  //   alert(data.sucess.msg);
+  // });
+
+  // $("#unban_ip_form").on('ajax:success',function(event, data, status, xhr){
+  //   $("#ban_ip_table tr").each(function(){
+  //     if($(this).find("td:eq(1)").html()==data.sucess.ip){
+  //       $(this).find("td:eq(2)").html("UnBanned")
+  //     }
+  //   });
+  //   alert(data.sucess.msg);
+  // });
+  
+  $("#upload_ip_form").submit(function (event) {
+    url = $(this).prop("action");
+    event.preventDefault();    
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      async: false,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        alert(data.success.msg);
+        location.reload();
+      },
+      error: function(){
+        alert("Please select IP list csv file");
+      }
+    });
+    return false;
+  });
+
+  
+  // $("#ban_agent_form").on('ajax:success',function(event, data, status, xhr){
+  //   $("#ban_agent_table tr").each(function(){
+  //     if($(this).find("td:eq(1)").html()==data.sucess.agent){
+  //       $(this).find("td:eq(2)").html("Banned")
+  //     }
+  //   });
+  //   alert(data.sucess.msg);
+  // });
+  // $("#unban_agent_form").on('ajax:success',function(event, data, status, xhr){
+  //   $("#ban_agent_table tr").each(function(){
+  //     if($(this).find("td:eq(1)").html()==data.sucess.agent){
+  //       $(this).find("td:eq(2)").html("UnBanned")
+  //     }
+  //   });
+  //   alert(data.sucess.msg);
+  // });
+
+  $("#agent_upload_form").submit(function (event) {
+    url = $(this).prop("action");
+    event.preventDefault();    
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      async: false,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        alert(data.success.msg);
+        location.reload();
+      },
+      error: function(){
+        alert("Please select UserAgent csv file");
+      }
+    });
+    return false;
+  });
+
+  $("#email_notification_reset").change(function(){
+    if($(this).prop("checked")){
+      $("#hidden_email_notification_reset").val("reset");
+    }else{
+      $("#hidden_email_notification_reset").val("");
+    }
+  });
+
+  $('body').on('click', '.sorting', function() {
+    $(this).addClass("sorting_asc").removeClass("sorting");
+    $("#sort_option").val("sorting_asc");
+    $("#search_form").submit();    
+  });
+
+  $('body').on('click', '.sorting_asc', function() {
+    $(this).addClass("sorting_desc").removeClass("sorting_asc");
+    $("#sort_option").val("sorting_desc");
+    $("#search_form").submit();
+  });
+
+  $('body').on('click', '.sorting_desc', function() {
+    $(this).addClass("sorting_asc").removeClass("sorting_desc");
+    $("#sort_option").val("sorting_asc");
+    $("#search_form").submit();
+  });
+
+  $("#campaign_is_sms").change(function(){
+    if($(this).prop("checked")){
+      $("#sms_service_list").css("display", "inline");
+    }else{
+      $("#sms_service_list").css("display", "none");
+    }
+  });
+
+  
+
+
+</script>
+</body>
+</html>

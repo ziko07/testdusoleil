@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ip: MyString
+  user_agent: MyString
+  referrer: MyString
+  fullpath: MyString
+  created_at: 2011-02-13 13:16:10
+  passed: false
+  campaign: 
+
+two:
+  ip: MyString
+  user_agent: MyString
+  referrer: MyString
+  fullpath: MyString
+  created_at: 2011-02-13 13:16:10
+  passed: false
+  campaign: 

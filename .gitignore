@@ -1,0 +1,13 @@
+.bundle
+db/*.sqlite3
+db/geo-csv
+db/isp
+log/*.log
+tmp/**/*
+tmp/restart.txt
+config/database.yml
+*~
+public/stylesheets/all.css
+public/javascripts/all.js
+config/password.txt
+db/import_ips

@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>
+    <%= @campaign.new_record? ? "New Campaign" : "Campaign ##{@campaign.id}"%>
+    <% if @campaign.try(:id) %>
+      <small>
+        Showing hits since: <%= @system_hits_first_at ? raw(label_helper(formatted(@system_hits_first_at),{:type => "info"})) : raw(label_helper('None Recorded Yet',{:type => 'important'}))%>
+      </small>
+    <% end %>
+    <%= link_to "Create Similar Campaign", campaign_clone_campaign_path(@campaign), target: "_blank", class: 'btn btn-default btn-primary' if @campaign.id.present?%>
+  </h1>
+</div>
+<% if @campaign.try(:id) %>
+  <div class="row">
+    <div class="span12">
+      <div class="alert alert-info alert-block">
+        <div class="row">
+          <div class="span2">
+            <p>
+              <strong>Creator:</strong> <%= @campaign.creator %><br />
+              <strong>Status:</strong> <%= raw(@campaign.formatted_status_flags) %>
+            </p>
+          </div>
+          <div class="span3">
+            <p>
+              <strong>Tracker:</strong> <%= @campaign.tracker %><br />
+              <strong>Traffic Type:</strong> <%= @campaign.traffic_type %>
+            </p>
+          </div>    
+          <div class="span3"> 
+            <p>
+              <strong>First Hit:</strong> <%= @campaign_hits_first_at ? formatted(@campaign_hits_first_at) : "None" %><br />
+              <strong>Last Hit:</strong> <%= @campaign_hits_last_at ? formatted(@campaign_hits_last_at) : "None"  %><br />
+            </p>
+          </div>
+          <div class="span3">
+            <p>
+              <strong>Running:</strong> <%= @campaign_days_running ? @campaign_days_running : raw("<span class='label label-important'>Not Yet Started</span>") %><br />
+              <strong>Total Hits:</strong> <%= @campaign_hits_total %> <span class="">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

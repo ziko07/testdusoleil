@@ -1,0 +1,24 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activerecord:
+    attributes:
+      campaign:
+        id: ID
+        safe_lp: Safe LP
+        real_lp: Real LP
+        rekey_from_1: Re-key from 1
+        rekey_from_2: Re-key from 2
+        rekey_from_3: Re-key from 3
+        rekey_from_4: Re-key from 4
+        rekey_from_5: Re-key from 5
+        rekey_from_6: Re-key from 6
+        rekey_to_1: Re-key to 1
+        rekey_to_2: Re-key to 2
+        rekey_to_3: Re-key to 3
+        rekey_to_4: Re-key to 4
+        rekey_to_5: Re-key to 5
+        rekey_to_6: Re-key to 6
+
+

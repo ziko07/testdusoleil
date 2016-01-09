@@ -1,0 +1,11 @@
+<%= render :partial => "header" %>
+<%= render :partial => "tabs" %>
+
+<h2>
+  Hit Counts by User Agent
+  <small>
+    Campaign #<%= @campaign.id%>
+  </small>
+</h2>
+
+<%= render :partial => "hit_counts/list" %>
