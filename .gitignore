@@ -1,8 +1,7 @@
 .bundle
 db/*.sqlite3
 db/geo-csv
-db/isp
-log/*.log
+db/isp=
 tmp/**/*
 tmp/restart.txt
 config/database.yml

@@ -1,0 +1,612 @@
+# Logfile created on 2016-01-07 12:11:16 +0600 by logger.rb/31641
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Environment: development
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Dispatcher: webrick
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Application: My Application (Development)
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Net instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing MemCache instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing deferred Rack instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 12:11:16 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Finished instrumentation
+[01/07/16 12:11:18 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 12:11:21 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 12:22:17 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 12:22:17 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 12:22:17 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 12:22:17 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Environment: development
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : No known dispatcher detected.
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Application: My Application (Development)
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Net instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing MemCache instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing deferred Rack instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 12:22:18 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Finished instrumentation
+[01/07/16 12:22:19 +0600 mahabub-Lenovo-G50-80 (5929)] INFO : Starting Agent shutdown
+[01/07/16 13:27:49 +0600 mahabub-Lenovo-G50-80 (5353)] INFO : Starting Agent shutdown
+[01/07/16 13:28:25 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:28:25 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:28:25 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Environment: development
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Dispatcher: webrick
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Application: My Application (Development)
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Net instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing MemCache instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:28:26 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Finished instrumentation
+[01/07/16 13:28:27 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:28:30 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:39:03 +0600 mahabub-Lenovo-G50-80 (7448)] INFO : Starting Agent shutdown
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Environment: development
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Dispatcher: webrick
+[01/07/16 13:39:16 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Application: My Application (Development)
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Net instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing MemCache instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:39:17 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Finished instrumentation
+[01/07/16 13:39:18 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:39:21 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:41:00 +0600 mahabub-Lenovo-G50-80 (7728)] INFO : Starting Agent shutdown
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Environment: development
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Dispatcher: webrick
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Application: My Application (Development)
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Net instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing MemCache instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:41:24 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Finished instrumentation
+[01/07/16 13:41:26 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:41:28 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:42:15 +0600 mahabub-Lenovo-G50-80 (7791)] INFO : Starting Agent shutdown
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Environment: development
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Dispatcher: webrick
+[01/07/16 13:42:25 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Application: My Application (Development)
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Net instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing MemCache instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:42:26 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Finished instrumentation
+[01/07/16 13:42:27 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:42:30 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:46:59 +0600 mahabub-Lenovo-G50-80 (7827)] INFO : Starting Agent shutdown
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Environment: development
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Dispatcher: webrick
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Application: My Application (Development)
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Net instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing MemCache instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:47:13 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Finished instrumentation
+[01/07/16 13:47:15 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:47:17 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:51:10 +0600 mahabub-Lenovo-G50-80 (8056)] INFO : Starting Agent shutdown
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Environment: development
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Dispatcher: webrick
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Application: My Application (Development)
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Net instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing MemCache instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:51:31 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Finished instrumentation
+[01/07/16 13:51:33 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:51:36 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 13:56:14 +0600 mahabub-Lenovo-G50-80 (8153)] INFO : Starting Agent shutdown
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Environment: development
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Dispatcher: webrick
+[01/07/16 13:56:47 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Application: My Application (Development)
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Net instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing MemCache instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing deferred Rack instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 13:56:48 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Finished instrumentation
+[01/07/16 13:56:49 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 13:56:52 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 14:11:27 +0600 mahabub-Lenovo-G50-80 (8291)] INFO : Starting Agent shutdown
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Environment: development
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Dispatcher: webrick
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Application: My Application (Development)
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Net instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing MemCache instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing deferred Rack instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 14:11:49 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Finished instrumentation
+[01/07/16 14:11:51 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 14:11:53 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 16:42:14 +0600 mahabub-Lenovo-G50-80 (8520)] INFO : Starting Agent shutdown
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Environment: development
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Dispatcher: webrick
+[01/07/16 16:42:25 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Application: My Application (Development)
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Net instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing MemCache instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing deferred Rack instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 16:42:26 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Finished instrumentation
+[01/07/16 16:42:28 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 16:42:29 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 16:43:39 +0600 mahabub-Lenovo-G50-80 (11903)] INFO : Starting Agent shutdown
+[01/07/16 16:44:08 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Starting the New Relic agent in "development" environment.
+[01/07/16 16:44:08 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[01/07/16 16:44:08 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Reading configuration from config/newrelic.yml (/home/mahabub/Development/Projects/test-dusoleil)
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : New Relic Agent Developer Mode enabled.
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Environment: development
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Dispatcher: webrick
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Application: My Application (Development)
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Rails 3+ middleware instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Net instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing MemCache instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing ActiveRecord instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing deferred Rack instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Rack::Builder middleware instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Rails 3 Error instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Rails 3 Controller instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Installing Rails 3.0 view instrumentation
+[01/07/16 16:44:09 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Finished instrumentation
+[01/07/16 16:44:10 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Doing deferred dependency-detection before Rack startup
+[01/07/16 16:44:13 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Reporting to: https://rpm.newrelic.com/accounts/792441/applications/5550980
+[01/07/16 17:23:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:23:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:23:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:23:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:24:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:24:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:24:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:24:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:25:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:25:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:25:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:25:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:26:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:26:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:26:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:26:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:27:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:27:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:27:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:27:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:28:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:28:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:28:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:28:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:29:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:29:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:29:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:29:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:30:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:30:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:30:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:30:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:31:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:31:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:31:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:31:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:32:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:32:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:32:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:32:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:33:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:33:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:33:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:33:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:34:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:34:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:34:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:34:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:35:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:35:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:35:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:35:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:36:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:36:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:36:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:36:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:37:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:37:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:37:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:37:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:38:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:38:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:38:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:38:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:39:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:39:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:39:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:39:15 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:40:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:40:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:40:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:40:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:41:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:41:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:41:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:41:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:42:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:42:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:42:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:42:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:43:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:43:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:43:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:43:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:44:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:44:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:44:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:44:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:45:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:45:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:45:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:45:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:46:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:46:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:46:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:46:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:47:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:47:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:47:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:47:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:48:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:48:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:48:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:48:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:49:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:49:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:49:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:49:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:50:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:50:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:50:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:50:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:51:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:51:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:51:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:51:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:52:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:52:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:52:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:52:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:53:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:53:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:53:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:53:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:54:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:54:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:54:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:54:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:55:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:55:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:55:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:55:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:56:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:56:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:56:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:56:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:57:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:57:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:57:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:57:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:58:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:58:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:58:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:58:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:59:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 17:59:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 17:59:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 17:59:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:00:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:00:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:00:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:00:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:01:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:01:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:01:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:01:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:02:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:02:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:02:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:02:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:03:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:03:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:03:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:03:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:04:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:04:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:04:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:04:55 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:05:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:05:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:05:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:05:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:06:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:06:35 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:06:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:06:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:07:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:07:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:07:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:07:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:08:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:08:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:08:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:08:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:09:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:09:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:09:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:09:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:10:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:10:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:10:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:10:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:11:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:11:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:11:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:11:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:12:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:12:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:12:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:12:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:13:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:13:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:13:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:13:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:14:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:14:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:14:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:14:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:15:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:15:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:15:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:15:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:16:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:16:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:16:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:16:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:17:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:17:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:17:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:17:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:18:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:18:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:18:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:18:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:19:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:19:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:19:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:19:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:20:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:20:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:20:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:20:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:21:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:21:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:21:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:21:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:22:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:22:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:22:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:22:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:23:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:23:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:23:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:23:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:24:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:24:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:24:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:24:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:25:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:25:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:25:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:25:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:26:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:26:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:26:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:26:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:27:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:27:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:27:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:27:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:28:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:28:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:28:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:28:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:29:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:29:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:29:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:29:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:30:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:30:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:30:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:30:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:31:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:31:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:31:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:31:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:32:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:32:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:32:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:32:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:33:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:33:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:33:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:33:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:34:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:34:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:34:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:34:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:35:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:35:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:35:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:35:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:36:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:36:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:36:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:36:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:37:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:37:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:37:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:37:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:38:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:38:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:38:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:38:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:39:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:39:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:39:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:39:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:40:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:40:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:40:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:40:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:41:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:41:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:41:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:41:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:42:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:42:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:42:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:42:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:43:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:43:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:43:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:43:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:44:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:44:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:44:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:44:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:45:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:45:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:45:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:45:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:46:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:46:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:46:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:46:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:47:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:47:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:47:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:47:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:48:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:48:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:48:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:48:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:49:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:49:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:49:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:49:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:50:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:50:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:50:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:50:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:51:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:51:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:51:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:51:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:52:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:52:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:52:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:52:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:53:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:53:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:53:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:53:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:54:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:54:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:54:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:54:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:55:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_data' in Agent Event Loop:
+[01/07/16 18:55:36 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:55:41 +0600 mahabub-Lenovo-G50-80 (12081)] INFO : Starting Agent shutdown
+[01/07/16 18:55:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : 1 error(s) running task for event 'report_transaction_event_data' in Agent Event Loop:
+[01/07/16 18:55:56 +0600 mahabub-Lenovo-G50-80 (12081)] ERROR : SocketError: getaddrinfo: Name or service not known
+[01/07/16 18:56:16 +0600 mahabub-Lenovo-G50-80 (12081)] WARN : Timed out opening connection to collector after 20.000071262 seconds. If this problem persists, please see http://status.newrelic.com
