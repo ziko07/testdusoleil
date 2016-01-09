@@ -5,8 +5,8 @@ gem 'mysql2', '0.2.6'
 gem 'rake', '0.8.7'
 
 gem 'cache_it', '0.0.2'
-# gem 'capistrano', '2.6.0'
-# gem 'capistrano-ext', '1.2.1'
+gem 'capistrano', '2.6.0'
+gem 'capistrano-ext', '1.2.1'
 
 gem 'whenever', '0.6.8'
 gem 'memcache-client', '1.8.5'
