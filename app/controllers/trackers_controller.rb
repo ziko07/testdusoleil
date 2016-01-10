@@ -14,6 +14,7 @@ class TrackersController < AdminController
   end
 
   def create
+    puts()
     @tracker = Tracker.new(params[:tracker])
     if @tracker.save
       redirect_to(@tracker, :notice => 'Tracker was successfully created.')

@@ -25,9 +25,6 @@ class HitsController < AdminController
     @campaign = Campaign.cache_it.find(:sha1 => sha1, :archived => false) if sha1
     return render :text => nil, :layout => false unless @campaign
     lp = Hit.select_lp_from_request(request, @campaign)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    puts(lp)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     respond_to do |format|
       format.html { return redirect_to redirection_url(lp) }
       format.js { return render :inline => (lp == :real_lp ? "top.location.replace('#{redirection_url(lp)}')" : "") }

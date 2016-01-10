@@ -308,9 +308,15 @@ class Hit < ActiveRecord::Base
     stat.hits += 1
     stat.save
     # stat.cache_it.increment :hits
+
     hit_redis_key = Digest::SHA512.hexdigest("hit_#{campaign.id}_#{request.ip}")
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    puts(hit_redis_key.inspect)
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     hit_cache_track = REDIS.get(hit_redis_key)
-    puts("Here1")
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    puts(hit_cache_track.inspect)
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     return :safe_lp if hit_cache_track.present?
     
     begin
