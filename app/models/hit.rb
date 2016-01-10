@@ -310,13 +310,7 @@ class Hit < ActiveRecord::Base
     # stat.cache_it.increment :hits
 
     hit_redis_key = Digest::SHA512.hexdigest("hit_#{campaign.id}_#{request.ip}")
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    puts(hit_redis_key.inspect)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     hit_cache_track = REDIS.get(hit_redis_key)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    puts(hit_cache_track.inspect)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     return :safe_lp if hit_cache_track.present?
     
     begin
@@ -346,8 +340,6 @@ class Hit < ActiveRecord::Base
           CampaignMailer.notification(campaign,0) if campaign.email_notification
         else
           Blockip.create(:ip => hit.ip, :source => 'autorun')
-          p "step 2"
-          puts("Here2")
           return :safe_lp
         end
       end
