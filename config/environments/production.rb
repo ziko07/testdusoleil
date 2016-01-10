@@ -59,5 +59,5 @@ Dusoleil::Application.configure do
  
   config.action_mailer.default_url_options = {:host => 'http://hubtrack.pw'}
 
-  ENV["REDISTOGO_URL"] = 'http://127.0.0.1:6379/'
+  ENV["REDIS_URL"] = 'http://127.0.0.1:6379/'
 end
