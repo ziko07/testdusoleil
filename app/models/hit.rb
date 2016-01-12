@@ -9,7 +9,7 @@ class Hit < ActiveRecord::Base
   belongs_to :campaign
   has_one :hit_cache_track
   has_one :user_agents, :class_name => "UserAgent", :foreign_key => :user_agent_key, :primary_key => :md5_user_agent
-  
+
   def md5_user_agent
     self.connection.raw_connection.query('SELECT MD5("' + user_agent + '")').first[0]
   end
@@ -21,14 +21,14 @@ class Hit < ActiveRecord::Base
   def isp_organization_location_info
     gblock    = GeocodeBlock.find_by_ip(ip)
     if gblock.present?
-      glocation = gblock.geocode_location      
+      glocation = gblock.geocode_location
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
         ipaddr = IPAddr.new(self.ip).to_i
         organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
-      end      
+      end
       country   = connection.select_value("select name from iplocationdb_country where code = '#{glocation.country}'")
       state     = connection.select_value("select name from iplocationdb_region where country_code = '#{glocation.country}' and region_code = '#{glocation.region}'")
       city      = glocation.city
@@ -43,7 +43,7 @@ class Hit < ActiveRecord::Base
     result = Blockip.blocked?(self.ip)
     return result
   end
-  
+
   def referrer_text
     refs = referrer.split("/")
     res = []
@@ -63,16 +63,16 @@ class Hit < ActiveRecord::Base
     self.fullpath.sub(/[\/|?|h|=]+[a-zA-Z0-9\-]+&/,"").split(/&/).map{|arg| arg.match(/([a-zA-Z0-9\_\-]+)\=([a-zA-Z0-9\_\-]+)/); @h[$1] = $2 }
     return @h
   end
-  
+
   def keywords_formatted
     # this uses the keywords_hash methods to pull the keywords and then formats them for the report
-    @formatted_output_array = Array.new 
+    @formatted_output_array = Array.new
     self.keywords_hash.each{|kw,arg| @formatted_output_array << "<nobr><span class='label'>#{kw}</span> #{arg}" }
     return @formatted_output_array.join("<br />")
   end
 
   def user_agent_blocked?
-    # Brian Note: I started with a railsy way of figuring out of the hit_count is blocked or not, 
+    # Brian Note: I started with a railsy way of figuring out of the hit_count is blocked or not,
     # but we want to create/update things as we're looking as well, and the best and most efficient
     # way to do that seemed to be to get hold of the raw mysql client and directly interact with the db
     #
@@ -80,33 +80,33 @@ class Hit < ActiveRecord::Base
     # and do a lot at once.
     #
     # if there's another way to do this... I'd love to learn how.
-    
+
     return false unless user_agent.present?   # if we don't have a user_agent... there's no point in moving forward (and we shouldn't block)
-    
+
     dbhandle = self.connection.raw_connection # geb raw connection (gets mysql2 client so we can do raw stuff)
-    
+
     ua = UserAgent.new                        # start with UserAgent instance
     ua_params = Hash.new("")                  # create hash for columns/values that defaults to "" (avoids errors in SQL command)
     ua_params = ua.serializable_hash          # split the model into a hash so we can all of the column names
-    
+
     ua_params['user_agent_string'] = ( '"' + self.user_agent + '"' )
     ua_params['user_agent_key']    = ( 'MD5("' + self.user_agent + '")' )   # using MYSQL to create MD5 hash
     ua_params['created_at']        = 'now()'
     ua_params['updated_at']        = 'now()'
-    
+
     # UserAgent SQL
     ua_sql =  'INSERT into user_agents '                         # This will create a new user agent if no match is found (only first time)
     ua_sql += '(' + ua_params.keys.join(",")  + ') '             # -- adds all column names into column array
     ua_sql += 'VALUES (' + ua_params.values.join(",") + ') '     # -- adds related values into value array
-    ua_sql += 'ON DUPLICATE KEY UPDATE '                         # if matching record exists (unique user_agent_key)... then 
+    ua_sql += 'ON DUPLICATE KEY UPDATE '                         # if matching record exists (unique user_agent_key)... then
     ua_sql += 'updated_at=' + ua_params['updated_at']            # -- update the updated_at field
-    
+
     dbhandle.query(ua_sql)                         # run the query
     ua_id = dbhandle.last_id                       # grab the ID of the match (or new record)
-    
+
     return false unless ( ua_id > 0  )        # if we don't have a ua_id, then something must have gone wrong and there's no point in moving forward (and we shouldn't block)
     return false unless ( campaign_id > 0  )  # if we don't have a campaign_id, there's no point in moving forward (and we shouldn't block)
-    
+
     hc = HitCount.new                         # start with HitCount instance
     hc_params = Hash.new("")                  # create hash for columns/values that defaults to "" (avoids errors in SQL command)
     hc_params = hc.serializable_hash          # split the model into a hash so we can all of the column names
@@ -115,7 +115,7 @@ class Hit < ActiveRecord::Base
     hc_params['created_at']    = 'now()'
     hc_params['updated_at']    = 'now()'
     hc_params['hits_total']    = 1
-    
+
     # HitCount SQL
     hc_sql =  'INSERT INTO hit_counts'                                                    # This will create a new hit_counts record if no match is found
     hc_sql += ' (' + hc_params.keys.join(",") + ')'                                       # -- adds all column names into column array
@@ -124,10 +124,10 @@ class Hit < ActiveRecord::Base
     hc_sql += ' updated_at=' + hc_params['updated_at'] + ','                              # -- update updated_at field
     hc_sql += ' hits_total=hits_total + 1,'                                               # -- add one to hits_total
     hc_sql += ' hits_blocked=IF(blocked = 1,hits_blocked+1,hits_blocked)'                 # -- add one to hits_blocked (if user_agent_blocked? i.e. blocked=1 )
-    
+
     dbhandle.query(hc_sql)                         # run query
     hc_id = dbhandle.last_id                       # grab hit_count ID
-    
+
     # Now... is it blocked?
     blocked = dbhandle.query('select IF(blocked = 1,1,NULL) as blocked from hit_counts where id=' + hc_id.to_s).first[0]
 
@@ -137,7 +137,7 @@ class Hit < ActiveRecord::Base
     blocked = true if self.user_agent == 'Apache-HttpClient/4.0.3 (java 1.5)'
     # second special case by request from Owen
     blocked = true if self.user_agent == 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727)'
-    
+
     return blocked ? true : false
   end
 
@@ -157,9 +157,9 @@ class Hit < ActiveRecord::Base
     referrer ||= campaign.filter_domain_facebook && self.referrer.downcase =~ /facebook/
     referrer ||= campaign.filter_domain_google && self.referrer.downcase =~ /google/
     referrer ||= campaign.filter_domain_msn && self.referrer.downcase =~ /msn/
-    
+
     if campaign.filter_broad_match
-      input_url     = !!(campaign.filter_domain_other =~ /http/) ? campaign.filter_domain_other : "http://"+campaign.filter_domain_other      
+      input_url     = !!(campaign.filter_domain_other =~ /http/) ? campaign.filter_domain_other : "http://"+campaign.filter_domain_other
       input_host    = URI.parse(input_url).host
 
       host = URI.parse(self.referrer).host
@@ -174,15 +174,15 @@ class Hit < ActiveRecord::Base
 
     if campaign.filter_exact_match
       # input_url = !!(campaign.filter_domain_other =~ /http/) ? campaign.filter_domain_other : "http://"+campaign.filter_domain_other
-      
+
       # input_host    = URI.parse(input_url).host
       # referer_host   = URI.parse(self.referrer).host
       # referer_path  = URI.parse(self.referrer).path
-      
+
       # if !!(referer_host =~ /#{input_host}/)==true and referer_path.size < 2
       #   referrer ||= campaign.filter_exact_match && true
       # else
-      #   referrer ||= campaign.filter_exact_match && false        
+      #   referrer ||= campaign.filter_exact_match && false
       # end
 
       if self.referrer.downcase =~ /#{campaign.filter_domain_other}/
@@ -203,8 +203,8 @@ class Hit < ActiveRecord::Base
   end
 
 
-  def connection_type_allowed?    
-    
+  def connection_type_allowed?
+
     if campaign.connection_type_filter_allow | campaign.connection_type_filter_dial_up | campaign.connection_type_filter_cellular | campaign.connection_type_filter_cable_dsl | campaign.connection_type_filter_corporate
       connection_type = REDIS.get(redis_key("connection_type"))
       unless connection_type.present?
@@ -219,18 +219,18 @@ class Hit < ActiveRecord::Base
         connec_type ||= campaign.connection_type_filter_cellular && connection_type.downcase =~ /cellular/
         connec_type ||= campaign.connection_type_filter_cable_dsl && connection_type.downcase =~ /cable\/dsl/
         connec_type ||= campaign.connection_type_filter_corporate && connection_type.downcase =~ /corporate/
-        
+
         return campaign.connection_type_filter_allow == !!connec_type
       else
         return true
       end
     else
-      return true  
-    end    
+      return true
+    end
   end
 
   def carrier_user_agent_allowed?
-    
+
     if campaign.wifi_filter_at_t | campaign.wifi_filter_sprint | campaign.wifi_filter_verizon | campaign.wifi_filter_t_mobile | campaign.wifi_filter_boost_mobile | campaign.wifi_filter_metro_pcs | campaign.wifi_filter_allow
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
@@ -239,7 +239,7 @@ class Hit < ActiveRecord::Base
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
       end
-      
+
       if organization.present?
         wifi = false
         # wifi ||= campaign.wifi_filter_wifi && organization.organization.downcase =~ /wifi/
@@ -256,11 +256,11 @@ class Hit < ActiveRecord::Base
       end
     else
       return true
-    end    
+    end
   end
 
   def browser_user_agent_allowed?
-    
+
     browser = false
     browser ||= campaign.browser_filter_firefox && self.user_agent =~ /Firefox/
     browser ||= campaign.browser_filter_safari && self.user_agent =~ /Safari/
@@ -271,19 +271,19 @@ class Hit < ActiveRecord::Base
   end
 
   def organization_allowed?
-    
+
     filter = []
     filter = filter + ['Facebook'] if campaign.filter_organization_facebook
     filter = filter + ['Google']   if campaign.filter_organization_google
     filter = filter + ['MSN']      if campaign.filter_organization_msn
     filter = filter + campaign.filter_organization_other.split(/ *, */) if campaign.filter_organization_other
-      
+
     # pass if nothing to filter for
     return true if filter.blank?
 
     ipaddr = IPAddr.new(self.ip).to_i
     organization = REDIS.get(redis_key("organization"))
-    unless organization.present?      
+    unless organization.present?
       organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
       REDIS.set(redis_key("organization"), organization)
       REDIS.expire(redis_key("organization"), 36000)
@@ -296,7 +296,7 @@ class Hit < ActiveRecord::Base
         REDIS.set(redis_key("isp"), isp)
         REDIS.expire(redis_key("isp"), 36000)
       end
-      
+
       return false if isp =~ /Joyent/
     end
 
@@ -312,7 +312,7 @@ class Hit < ActiveRecord::Base
     hit_redis_key = Digest::SHA512.hexdigest("hit_#{campaign.id}_#{request.ip}")
     hit_cache_track = REDIS.get(hit_redis_key)
     return :safe_lp if hit_cache_track.present?
-    
+
     begin
       hit = Hit.new do |hit|
         hit.ip = request.ip
@@ -324,14 +324,14 @@ class Hit < ActiveRecord::Base
         hit.analyzed = false
         hit.passed = false
       end
-      
+
       # Rails.logger.info "env hash: " + request.env.inspect
       # Rails.logger.info "headers hash: " + request.headers.inspect
       # Rails.logger.info "referrer: " + request.referrer if request.referrer
       # Rails.logger.info "env[referrer]: " + request.env['HTTP_REFERRER'] if request.env['HTTP_REFERRER']
       # Rails.logger.info "domain: " + request.domain if request.domain
 
-      if campaign.status == "off" and campaign.autorun 
+      if campaign.status == "off" and campaign.autorun
         if campaign.started?
           campaign.status = "on"
           campaign.autorun = false
@@ -378,7 +378,7 @@ class Hit < ActiveRecord::Base
 
         return :safe_lp
       end
-      
+
       hit.passed &&= hit.organization_allowed?
       unless hit.passed
         hit.blocked_organization = true
@@ -388,7 +388,7 @@ class Hit < ActiveRecord::Base
 
         return :safe_lp
       end
-      
+
       hit.passed &&= hit.mobile_user_agent_allowed?
       unless hit.passed
         hit.blocked_mobile = true
@@ -407,7 +407,7 @@ class Hit < ActiveRecord::Base
 
         return :safe_lp
       end
-      
+
       hit.passed &&= hit.carrier_user_agent_allowed?
       unless hit.passed
         hit.blocked_wifi_carrier = true
@@ -420,11 +420,11 @@ class Hit < ActiveRecord::Base
       hit.passed &&= hit.browser_user_agent_allowed?
       unless hit.passed
         hit.blocked_browser = true
-        stat.blocked_browser += 1        
+        stat.blocked_browser += 1
         stat.save
         return :safe_lp
       end
-      
+
       hit.passed &&= campaign.referer_domain_allowed?(request.referrer)
       unless hit.passed
         hit.blocked_domain = true
@@ -442,18 +442,15 @@ class Hit < ActiveRecord::Base
         return :safe_lp
       end
 
-      if hit.passed && !campaign.match_timezone
-        return :safe_lp
-      end
-      
+
       if hit.passed && (campaign.geocode_metro_code_list.present? || campaign.countries.present?)
         block = GeocodeBlock.find_by_ip(hit.ip)
         location = block.geocode_location if block
         if location
-          metro_code_id = location.geocode_metro_code_id 
+          metro_code_id = location.geocode_metro_code_id
           country = location.country
         end
-        
+
         if metro_code_id != 0 && campaign.geocode_metro_code_list.present?
           hit.geocode_metro_code_id = metro_code_id
           if campaign.geocode_metro_code_list_allow
@@ -462,7 +459,28 @@ class Hit < ActiveRecord::Base
             hit.passed &&= ! campaign.metro_codes[metro_code_id]
           end
         end
-        if country.present? && campaign.countries.present?  
+
+        unless  country.present?
+          if ENV['RAILS_ENV'] == 'development'
+            ip = '103.15.140.69'
+            # ip = '125.26.112.3'
+          else
+            ip = hit.ip
+          end
+          require 'net/http'
+          url = URI.parse("http://freegeoip.net/json/#{ip}")
+          req = Net::HTTP::Get.new(url.to_s)
+          res = Net::HTTP.start(url.host, url.port) { |http|
+            http.request(req)
+          }
+          response = res.body
+          if response.present?
+            @response = JSON.parse(response)
+          end
+          country = @response['country_code']
+        end
+
+        if country.present? && campaign.countries.present?
           if campaign.geocode_country_list_allow
             hit.passed &&= !! campaign.countries[country]
           else
@@ -477,11 +495,14 @@ class Hit < ActiveRecord::Base
           return :safe_lp
         end
       end
+      if hit.passed && !campaign.match_timezone
+        return :safe_lp
+      end
       stat.passed += 1
       # stat.cache_it.increment :passed
       stat.save
       return :real_lp
-    ensure      
+    ensure
       hit.save
       REDIS.set(hit_redis_key, hit.id)
       REDIS.expire(hit_redis_key, Sysconfig.singleton.hit_cache_timeout.minutes.to_i)
