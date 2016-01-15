@@ -25,7 +25,7 @@ class Hit < ActiveRecord::Base
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
         ipaddr = IPAddr.new(self.ip).to_i
-        organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
+        organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
       end
@@ -235,7 +235,7 @@ class Hit < ActiveRecord::Base
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
         ipaddr = IPAddr.new(self.ip).to_i
-        organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
+        organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
       end
@@ -284,7 +284,7 @@ class Hit < ActiveRecord::Base
     ipaddr = IPAddr.new(self.ip).to_i
     organization = REDIS.get(redis_key("organization"))
     unless organization.present?
-      organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
+      organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
       REDIS.set(redis_key("organization"), organization)
       REDIS.expire(redis_key("organization"), 36000)
     end
@@ -495,8 +495,10 @@ class Hit < ActiveRecord::Base
           return :safe_lp
         end
       end
-      if hit.passed && !campaign.match_timezone
-        return :safe_lp
+      if campaign.match_time_zone_flag
+        if hit.passed && !campaign.match_timezone
+          return :safe_lp
+        end
       end
       stat.passed += 1
       # stat.cache_it.increment :passed

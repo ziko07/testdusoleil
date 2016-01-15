@@ -522,6 +522,10 @@
     <div class="row">
       <div class="span5">
         <div id="geo-inputs2">
+          <br />
+          <%= f.check_box :match_time_zone_flag %> Allow
+          <br />
+          <br />
           <h3><span>Your Browser Timezone:  <%=  cookies['timezone'] %> </span></h3>
           <br>
           <h3><span>Your Ip Timezone: <%= @ip_timezone %></span></h3>

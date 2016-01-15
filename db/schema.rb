@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160107062219) do
+ActiveRecord::Schema.define(:version => 20160115052901) do
 
   create_table "blockips", :force => true do |t|
     t.string "ip"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20160107062219) do
     t.string   "mail_services"
     t.boolean  "sent_mail",                                        :default => false
     t.boolean  "match_timezone",                                   :default => false,   :null => false
+    t.boolean  "match_time_zone_flag"
   end
 
   add_index "campaigns", ["archived"], :name => "index_campaigns_on_archived"
@@ -263,6 +264,13 @@ ActiveRecord::Schema.define(:version => 20160107062219) do
     t.string   "connection_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "iplocationdb_organization", :force => true do |t|
+    t.integer "prefix",                     :null => false
+    t.integer "start_ip",                   :null => false
+    t.integer "end_ip",                     :null => false
+    t.string  "organization", :limit => 64, :null => false
   end
 
   create_table "stats", :force => true do |t|
