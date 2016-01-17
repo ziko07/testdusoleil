@@ -281,16 +281,22 @@ class Hit < ActiveRecord::Base
     # pass if nothing to filter for
     return true if filter.blank?
     # ip = request.remote_ip
-    # if ENV['RAILS_ENV'] == 'development'
-    #   ip = '103.15.140.69'
-    #   #ip = '125.26.112.3'
-    # else
-    #   ip = self.ip
-    # end
-    ipaddr = IPAddr.new(self.ip).to_i
+    if ENV['RAILS_ENV'] == 'development'
+      ip = '103.15.140.69'
+      #ip = '125.26.112.3'
+    else
+      ip = self.ip
+    end
+    ipaddr = IPAddr.new(ip).to_i
     organization = REDIS.get(redis_key("organization"))
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+    puts(organization)
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
     unless organization.present?
       organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}'between start_ip and end_ip")
+      puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+      puts(organization)
+      puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
       REDIS.set(redis_key("organization"), organization)
       REDIS.expire(redis_key("organization"), 36000)
     end
@@ -305,6 +311,9 @@ class Hit < ActiveRecord::Base
 
       return false if isp =~ /Joyent/
     end
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    puts(filter.any?{|f|organization.downcase.index(f.downcase)})
+    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
     return campaign.filter_organization_allow == !!filter.any?{|f|organization.downcase.index(f.downcase)}
   end
