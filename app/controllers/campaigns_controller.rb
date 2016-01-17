@@ -37,8 +37,8 @@ class CampaignsController < AdminController
   def show
     ip = request.remote_ip
     if ENV['RAILS_ENV'] == 'development'
-      #ip = '103.15.140.69'
-       ip = '125.26.112.3'
+       ip = '103.15.140.69'
+      # ip = '125.26.112.3'
     end
     @ip_timezone = Campaign.check_timezone(ip)
     @metro_codes_recent, @metro_codes_not_recent = @campaign.all_metro_codes_partition
@@ -56,8 +56,8 @@ class CampaignsController < AdminController
     @metro_codes_recent, @metro_codes_not_recent = @campaign.all_metro_codes_partition
     ip = request.remote_ip
     if ENV['RAILS_ENV'] == 'development'
-      #ip = '103.15.140.69'
-       ip = '125.26.112.3'
+       ip = '103.15.140.69'
+      #ip = '125.26.112.3'
     end
     @ip_timezone = Campaign.check_timezone(ip)
     render "show"
@@ -83,8 +83,8 @@ class CampaignsController < AdminController
   # POST /campaigns
   def create
     @campaign = Campaign.new(params[:campaign])
-    if ((params[:ip_time].present?) && params[:browser_time].present? )
-      if(params[:ip_time].downcase == params[:browser_time].downcase)
+    if ((params[:campaign][:ip_timezone].present?) && params[:campaign][:browser_timezone].present? )
+      if(params[:campaign][:ip_timezone].downcase == params[:campaign][:browser_timezone].downcase)
         @campaign.match_timezone = true
       end
     end
@@ -98,8 +98,8 @@ class CampaignsController < AdminController
   # PUT /campaigns/1
   def update
     # in case it wasn't set at all
-    if ((params[:ip_time].present?) && params[:browser_time].present? )
-      if(params[:ip_time].downcase == params[:browser_time].downcase)
+    if ((params[:campaign][:ip_timezone].present?) && params[:campaign][:browser_timezone].present? )
+      if(params[:campaign][:ip_timezone].downcase == params[:campaign][:browser_timezone].downcase)
         @campaign.update_attributes(match_timezone: true)
       else
         @campaign.update_attributes(match_timezone: false)

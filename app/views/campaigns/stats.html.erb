@@ -23,6 +23,7 @@
       <th>IP</th>
       <th style="width: 100px;">ISP/Organization</th>
       <th>Referrer</th>
+      <th>TimeZone</th>
       <th>Proxy IP</th>
       <th>Mobile</th>
       <th style="width: 76px;">Wifi/Carrier</th>
@@ -42,6 +43,7 @@
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_ip_pct, :precision => 2) %></td>
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_isp_organization_pct, :precision => 2) %></td>    
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_referrer_pct, :precision => 2) %></td>
+    <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_time_zone, :precision => 2) %></td>
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_proxy_ip_pct, :precision => 2) %></td>
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_mobile_pct, :precision => 2) %></td>
     <td><%= stat.analyzed == 0 ? "n/a" : number_to_percentage(stat.blocked_wifi_carrier_pct, :precision => 2) %></td>

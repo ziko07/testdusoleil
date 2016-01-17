@@ -9,6 +9,7 @@
       <th>From IP</th>
       <th> ISP </th>
       <th>Referrer</th>
+      <th>TimeZOne</th>
       <th>Passed</th>
       <th>Banned</th>
       <th>Reason Blocked</th>
@@ -56,8 +57,16 @@
         <span class="label label-important" rel="popover" data-original-title="Referrer!" data-content="Campaign ID: <%= hit.campaign_id %>
           <hr />
           Referrer: <%= hit.referrer_text %>
-          ">!</span>&nbsp;        
+          ">!</span>&nbsp;
         <%= hit.blocked_referrer? ? raw(label_helper("yes")) : raw(label_helper("no")) %>
+      </td>
+
+      <td>
+        <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser_ip: <%= hit.campaign.browser_timezone %>
+          <hr />
+          Ip Timezone: <%= hit.campaign.ip_timezone %>
+          ">!</span>&nbsp;
+        <%= hit.blocked_timezone? ? raw(label_helper("reject",{:type => "important"})) : raw(label_helper("pass")) %>
       </td>
 
       <td><%= hit.passed ? raw(label_helper("yes")) : raw(label_helper("no",{:type => "important"})) %></td>

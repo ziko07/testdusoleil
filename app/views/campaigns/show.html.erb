@@ -530,8 +530,8 @@
           <br>
           <h3><span>Your Ip Timezone: <%= @ip_timezone %></span></h3>
           <br>
-          <%= hidden_field_tag :browser_time, value: cookies['timezone'] %>
-          <%= hidden_field_tag :ip_time, value: @ip_timezone %>
+          <%= f.hidden_field :browser_timezone, value: cookies['timezone'] %>
+          <%= f.hidden_field :ip_timezone, value: @ip_timezone %>
         </div>
       </div>
       <div class="span7">

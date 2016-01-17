@@ -280,8 +280,14 @@ class Hit < ActiveRecord::Base
 
     # pass if nothing to filter for
     return true if filter.blank?
-
-    ipaddr = IPAddr.new(self.ip).to_i
+    ip = request.remote_ip
+    if ENV['RAILS_ENV'] == 'development'
+      ip = '103.15.140.69'
+      #ip = '125.26.112.3'
+    else
+      ip = self.ip
+    end
+    ipaddr = IPAddr.new(ip).to_i
     organization = REDIS.get(redis_key("organization"))
     unless organization.present?
       organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
@@ -497,7 +503,13 @@ class Hit < ActiveRecord::Base
       end
       if campaign.match_time_zone_flag
         if hit.passed && !campaign.match_timezone
+          hit.blocked_timezone = true
+          stat.stat_timezone = stat.stat_timezone + 1
+          hit.passed = false
+          stat.save
           return :safe_lp
+        else
+          hit.blocked_timezone = false
         end
       end
       stat.passed += 1

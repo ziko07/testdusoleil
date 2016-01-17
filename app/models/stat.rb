@@ -51,7 +51,11 @@ class Stat < ActiveRecord::Base
   def blocked_referrer_pct
     100.0 * blocked_referrer / analyzed
   end
-  
+
+  def blocked_time_zone
+    100.0 * stat_timezone / analyzed
+  end
+
   def self.for_date(campaign_id, date, options = {})
     conds = {:run_at => date, :campaign_id => campaign_id}
     cache_it.find(conds, options) || create(conds)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160115052901) do
+ActiveRecord::Schema.define(:version => 20160116081326) do
 
   create_table "blockips", :force => true do |t|
     t.string "ip"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20160115052901) do
     t.boolean  "sent_mail",                                        :default => false
     t.boolean  "match_timezone",                                   :default => false,   :null => false
     t.boolean  "match_time_zone_flag"
+    t.string   "browser_timezone"
+    t.string   "ip_timezone"
   end
 
   add_index "campaigns", ["archived"], :name => "index_campaigns_on_archived"
@@ -224,6 +226,7 @@ ActiveRecord::Schema.define(:version => 20160115052901) do
     t.boolean  "blocked_browser",         :default => false, :null => false
     t.boolean  "blocked_referrer",        :default => false, :null => false
     t.boolean  "blocked_connection_type", :default => false, :null => false
+    t.boolean  "blocked_timezone",        :default => false, :null => false
   end
 
   add_index "hits", ["campaign_id", "ip", "created_at"], :name => "index_hits_on_campaign_id_and_ip_and_created_at"
@@ -266,11 +269,52 @@ ActiveRecord::Schema.define(:version => 20160115052901) do
     t.datetime "updated_at"
   end
 
-  create_table "iplocationdb_organization", :force => true do |t|
-    t.integer "prefix",                     :null => false
+  create_table "iplocationdb_country", :primary_key => "code", :force => true do |t|
+    t.string "name", :limit => 64, :null => false
+  end
+
+  create_table "iplocationdb_ip", :id => false, :force => true do |t|
+    t.integer "prefix",      :limit => 1, :null => false
+    t.integer "start_ip",                 :null => false
+    t.integer "end_ip",                   :null => false
+    t.integer "location_id",              :null => false
+  end
+
+  add_index "iplocationdb_ip", ["prefix", "start_ip", "end_ip"], :name => "prefix"
+
+  create_table "iplocationdb_isp", :id => false, :force => true do |t|
+    t.integer "prefix",   :limit => 1,  :null => false
+    t.integer "start_ip",               :null => false
+    t.integer "end_ip",                 :null => false
+    t.string  "isp",      :limit => 64, :null => false
+  end
+
+  add_index "iplocationdb_isp", ["prefix", "start_ip", "end_ip"], :name => "prefix"
+
+  create_table "iplocationdb_location", :force => true do |t|
+    t.string  "country",    :limit => 2,                                :null => false
+    t.string  "region",     :limit => 2,                                :null => false
+    t.string  "city",       :limit => 64,                               :null => false
+    t.string  "postalcode", :limit => 16,                               :null => false
+    t.decimal "latitude",                 :precision => 8, :scale => 4, :null => false
+    t.decimal "longitude",                :precision => 8, :scale => 4, :null => false
+    t.string  "metrocode",  :limit => 3,                                :null => false
+    t.string  "areacode",   :limit => 3,                                :null => false
+  end
+
+  create_table "iplocationdb_organization", :id => false, :force => true do |t|
+    t.integer "prefix",       :limit => 1,  :null => false
     t.integer "start_ip",                   :null => false
     t.integer "end_ip",                     :null => false
     t.string  "organization", :limit => 64, :null => false
+  end
+
+  add_index "iplocationdb_organization", ["prefix", "start_ip", "end_ip"], :name => "prefix"
+
+  create_table "iplocationdb_region", :id => false, :force => true do |t|
+    t.string "country_code", :limit => 2,  :null => false
+    t.string "region_code",  :limit => 2,  :null => false
+    t.string "name",         :limit => 64, :null => false
   end
 
   create_table "stats", :force => true do |t|
@@ -289,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20160115052901) do
     t.integer "blocked_browser",          :default => 0, :null => false
     t.integer "blocked_referrer",         :default => 0, :null => false
     t.integer "blocked_connection_type",  :default => 0, :null => false
+    t.integer "stat_timezone",            :default => 0
   end
 
   add_index "stats", ["campaign_id", "run_at"], :name => "index_stats_on_campaign_id_and_run_at", :unique => true
