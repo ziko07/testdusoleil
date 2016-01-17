@@ -25,7 +25,7 @@ class Hit < ActiveRecord::Base
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
         ipaddr = IPAddr.new(self.ip).to_i
-        organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
+        organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
       end
@@ -235,7 +235,7 @@ class Hit < ActiveRecord::Base
       organization = REDIS.get(redis_key("organization"))
       unless organization.present?
         ipaddr = IPAddr.new(self.ip).to_i
-        organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
+        organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}' between start_ip and end_ip")
         REDIS.set(redis_key("organization"), organization)
         REDIS.expire(redis_key("organization"), 36000)
       end
@@ -280,17 +280,17 @@ class Hit < ActiveRecord::Base
 
     # pass if nothing to filter for
     return true if filter.blank?
-    ip = request.remote_ip
-    if ENV['RAILS_ENV'] == 'development'
-      ip = '103.15.140.69'
-      #ip = '125.26.112.3'
-    else
-      ip = self.ip
-    end
-    ipaddr = IPAddr.new(ip).to_i
+    # ip = request.remote_ip
+    # if ENV['RAILS_ENV'] == 'development'
+    #   ip = '103.15.140.69'
+    #   #ip = '125.26.112.3'
+    # else
+    #   ip = self.ip
+    # end
+    ipaddr = IPAddr.new(self.ip).to_i
     organization = REDIS.get(redis_key("organization"))
     unless organization.present?
-      organization = connection.select_value("select organization from iplocationdb_organization where #{ipaddr} between start_ip and end_ip")
+      organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}'between start_ip and end_ip")
       REDIS.set(redis_key("organization"), organization)
       REDIS.expire(redis_key("organization"), 36000)
     end
