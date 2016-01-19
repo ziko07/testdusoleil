@@ -307,6 +307,7 @@ class Campaign < ActiveRecord::Base
 
   def self.check_timezone(ip)
     require 'net/http'
+    require 'net/https'
     url = URI.parse("http://freegeoip.net/json/#{ip}")
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) { |http|
@@ -316,7 +317,13 @@ class Campaign < ActiveRecord::Base
     if response.present?
       @response = JSON.parse(response)
     end
-    return @response['time_zone']
+    lat = @response['latitude']
+    lon = @response['longitude']
+    geo = "https://maps.googleapis.com/maps/api/timezone/json?location=#{lat},#{lon}&timestamp=#{Date.today.to_time.to_i}"
+    url1 = URI.escape(geo)
+    resp = RestClient.get(url1)
+    result = JSON.parse(resp.body)
+    return result['timeZoneId']
   end
   protected
   

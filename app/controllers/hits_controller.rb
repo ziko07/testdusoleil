@@ -23,8 +23,13 @@ class HitsController < AdminController
   def create
     sha1 = params[:sha1] || params[:h] || params[:id]
     @campaign = Campaign.cache_it.find(:sha1 => sha1, :archived => false) if sha1
+    @request = request
     return render :text => nil, :layout => false unless @campaign
-    lp = Hit.select_lp_from_request(request, @campaign)
+  end
+
+  def check_hit
+    @campaign = Campaign.find_by_id(params[:id])
+    lp = Hit.select_lp_from_request(request, @campaign,params[:time_zone])
     respond_to do |format|
       format.html { return redirect_to redirection_url(lp) }
       format.js { return render :inline => (lp == :real_lp ? "top.location.replace('#{redirection_url(lp)}')" : "") }

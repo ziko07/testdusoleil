@@ -37,8 +37,8 @@ class CampaignsController < AdminController
   def show
     ip = request.remote_ip
     if ENV['RAILS_ENV'] == 'development'
-       ip = '103.15.140.69'
-      # ip = '125.26.112.3'
+       #ip = '103.15.140.69'
+       ip = '213.155.18.3'
     end
     @ip_timezone = Campaign.check_timezone(ip)
     @metro_codes_recent, @metro_codes_not_recent = @campaign.all_metro_codes_partition
@@ -56,8 +56,8 @@ class CampaignsController < AdminController
     @metro_codes_recent, @metro_codes_not_recent = @campaign.all_metro_codes_partition
     ip = request.remote_ip
     if ENV['RAILS_ENV'] == 'development'
-       ip = '103.15.140.69'
-      #ip = '125.26.112.3'
+       # ip = '103.15.140.69'
+      ip = '46.165.220.219'
     end
     @ip_timezone = Campaign.check_timezone(ip)
     render "show"

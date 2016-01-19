@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160116081326) do
+ActiveRecord::Schema.define(:version => 20160118144621) do
 
   create_table "blockips", :force => true do |t|
     t.string "ip"
@@ -227,6 +227,8 @@ ActiveRecord::Schema.define(:version => 20160116081326) do
     t.boolean  "blocked_referrer",        :default => false, :null => false
     t.boolean  "blocked_connection_type", :default => false, :null => false
     t.boolean  "blocked_timezone",        :default => false, :null => false
+    t.string   "ip_timezone"
+    t.string   "browser_timezone"
   end
 
   add_index "hits", ["campaign_id", "ip", "created_at"], :name => "index_hits_on_campaign_id_and_ip_and_created_at"
@@ -256,6 +258,12 @@ ActiveRecord::Schema.define(:version => 20160116081326) do
   create_table "hits_by_campaign", :id => false, :force => true do |t|
     t.integer "campaign_id",              :default => 0, :null => false
     t.integer "hits_count",  :limit => 8, :default => 0, :null => false
+  end
+
+  create_table "ip_lists", :force => true do |t|
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ipconnection_types", :force => true do |t|

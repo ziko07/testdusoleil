@@ -62,11 +62,16 @@
       </td>
 
       <td>
-        <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser_ip: <%= hit.campaign.browser_timezone %>
+        <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser TimeZone: <%= hit.browser_timezone %>
           <hr />
-          Ip Timezone: <%= hit.campaign.ip_timezone %>
+          Ip Timezone: <%= hit.ip_timezone %>
           ">!</span>&nbsp;
-        <%= hit.blocked_timezone? ? raw(label_helper("reject",{:type => "important"})) : raw(label_helper("pass")) %>
+        <% if (hit.ip_timezone != hit.browser_timezone) %>
+        <%= raw(label_helper("reject",{:type => "important"})) %>
+        <%else%>
+            <%=  raw(label_helper("pass")) %>
+        <%end%>
+        <%#= hit.ip_timezone != hit.browser_timezone? ? raw(label_helper("reject",{:type => "important"})) : raw(label_helper("pass")) %>
       </td>
 
       <td><%= hit.passed ? raw(label_helper("yes")) : raw(label_helper("no",{:type => "important"})) %></td>

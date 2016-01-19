@@ -289,14 +289,9 @@ class Hit < ActiveRecord::Base
     end
     ipaddr = IPAddr.new(ip).to_i
     organization = REDIS.get(redis_key("organization"))
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
-    puts(organization)
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
     unless organization.present?
       organization = connection.select_value("select organization from iplocationdb_organization where prefix = ('#{ipaddr}' >> 24) and '#{ipaddr}'between start_ip and end_ip")
-      puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
-      puts(organization)
-      puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+
       REDIS.set(redis_key("organization"), organization)
       REDIS.expire(redis_key("organization"), 36000)
     end
@@ -311,14 +306,11 @@ class Hit < ActiveRecord::Base
 
       return false if isp =~ /Joyent/
     end
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    puts(filter.any?{|f|organization.downcase.index(f.downcase)})
-    puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
     return campaign.filter_organization_allow == !!filter.any?{|f|organization.downcase.index(f.downcase)}
   end
 
-  def self.select_lp_from_request(request, campaign)
+  def self.select_lp_from_request(request, campaign, time_zone)
     stat = Stat.today(campaign.id, :skip_counters => true)
     stat.hits += 1
     stat.save
@@ -330,7 +322,7 @@ class Hit < ActiveRecord::Base
 
     begin
       hit = Hit.new do |hit|
-        hit.ip = request.ip
+        hit.ip = request.remote_ip
         hit.user_agent = request.user_agent || ''
         hit.referrer = request.referrer || ''
         hit.forwarded_for = request.headers['X-FORWARDED-FOR']
@@ -339,6 +331,17 @@ class Hit < ActiveRecord::Base
         hit.analyzed = false
         hit.passed = false
       end
+
+      if ENV['RAILS_ENV'] == 'development'
+         #ip = '103.15.140.69'
+         ip = '46.165.220.219'
+      else
+        ip = hit.ip
+      end
+      ip_timezone = Campaign.check_timezone(ip)
+      hit.ip_timezone = ip_timezone
+      hit.browser_timezone = time_zone
+
 
       # Rails.logger.info "env hash: " + request.env.inspect
       # Rails.logger.info "headers hash: " + request.headers.inspect
@@ -476,12 +479,7 @@ class Hit < ActiveRecord::Base
         end
 
         unless  country.present?
-          if ENV['RAILS_ENV'] == 'development'
-            ip = '103.15.140.69'
-            # ip = '125.26.112.3'
-          else
-            ip = hit.ip
-          end
+
           require 'net/http'
           url = URI.parse("http://freegeoip.net/json/#{ip}")
           req = Net::HTTP::Get.new(url.to_s)
@@ -511,14 +509,14 @@ class Hit < ActiveRecord::Base
         end
       end
       if campaign.match_time_zone_flag
-        if hit.passed && !campaign.match_timezone
-          hit.blocked_timezone = true
-          stat.stat_timezone = stat.stat_timezone + 1
-          hit.passed = false
-          stat.save
-          return :safe_lp
-        else
-          hit.blocked_timezone = false
+        if (time_zone != ip_timezone)
+            hit.blocked_timezone = true
+            stat.stat_timezone = stat.stat_timezone + 1
+            hit.passed = false
+            stat.save
+            return :safe_lp
+          else
+            hit.blocked_timezone = false
         end
       end
       stat.passed += 1

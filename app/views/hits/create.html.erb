@@ -1,0 +1,18 @@
+<div class="loader">
+  <%= image_tag('page-loader.gif', width: 150) %>
+  <h4> Checking your browser timezone please wait..... </h4>
+</div>
+
+<script type="text/javascript">
+    (function () {
+        window.addEventListener('load', get_time_zone, false)
+    })();
+    function get_time_zone() {
+        $('.navbar.navbar-fixed-top').hide();
+        $('body').css('background', '#dfdfdf');
+        var tz = $.set_timezone();
+        console.log(tz);
+        $.cookie('timezone', tz, {path: '/'});
+        window.location.href = "/check_hit/" + "<%= @campaign.id %>?time_zone=" + tz ;
+    }
+</script>

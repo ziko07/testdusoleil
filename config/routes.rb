@@ -5,7 +5,7 @@ Dusoleil::Application.routes.draw do
     post 'ban', :on => :member
     get 'ban', :on => :member
   end
-
+   get 'check_hit/:id', to: "hits#check_hit"
   resources :campaigns, :except => :edit do
     get 'campaign_clone', :on => :member
     get 'stats', :on => :member

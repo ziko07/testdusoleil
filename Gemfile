@@ -16,6 +16,7 @@ gem 'memcache-client', '1.8.5'
 gem 'jquery-rails', '1.0.14'
 
 gem 'will_paginate'
+gem 'rest-client', '>= 1.6.0'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
