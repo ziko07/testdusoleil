@@ -310,7 +310,7 @@ class Hit < ActiveRecord::Base
     return campaign.filter_organization_allow == !!filter.any?{|f|organization.downcase.index(f.downcase)}
   end
 
-  def self.select_lp_from_request(request, campaign, time_zone)
+  def self.select_lp_from_request(request, campaign, time_zone,full_path)
     stat = Stat.today(campaign.id, :skip_counters => true)
     stat.hits += 1
     stat.save
@@ -326,7 +326,7 @@ class Hit < ActiveRecord::Base
         hit.user_agent = request.user_agent || ''
         hit.referrer = request.referrer || ''
         hit.forwarded_for = request.headers['X-FORWARDED-FOR']
-        hit.fullpath = request.fullpath
+        hit.fullpath = full_path
         hit.campaign_id = campaign.id
         hit.analyzed = false
         hit.passed = false

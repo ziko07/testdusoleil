@@ -1,6 +1,5 @@
 <div class="loader">
   <%= image_tag('page-loader.gif', width: 150) %>
-  <h4> Checking your browser timezone please wait..... </h4>
 </div>
 
 <script type="text/javascript">
@@ -13,6 +12,6 @@
         var tz = $.set_timezone();
         console.log(tz);
         $.cookie('timezone', tz, {path: '/'});
-        window.location.href = "/check_hit/" + "<%= @campaign.id %>?time_zone=" + tz ;
+        window.location.href = "/check_hit/" + "<%= @campaign.id %>?time_zone=" + tz + "&full_path=<%= @full_path %>" ;
     }
 </script>
