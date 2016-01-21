@@ -45,16 +45,19 @@ class Hit < ActiveRecord::Base
   end
 
   def referrer_text
-    refs = referrer.split("/")
-    res = []
-    refs.each do |ref|
-      if ref.size > 30
-        res << ref.scan(/.{1,30}./).join("<br/>")
-      else
-        res << ref
+    if referrer.present?
+      refs = referrer.split("/")
+      res = []
+      refs.each do |ref|
+        if ref.size > 30
+          res << ref.scan(/.{1,30}./).join("<br/>")
+        else
+          res << ref
+        end
       end
+      res.flatten.join("/")
     end
-    res.flatten.join("/")
+
   end
 
   def keywords_hash
