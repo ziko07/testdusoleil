@@ -60,7 +60,9 @@ class Hit < ActiveRecord::Base
   def keywords_hash
     # this rips around the URLARGS and splits them up into ARG => VALUE hash
     @h = Hash.new
-    self.fullpath.sub(/[\/|?|h|=]+[a-zA-Z0-9\-]+&/,"").split(/&/).map{|arg| arg.match(/([a-zA-Z0-9\_\-]+)\=([a-zA-Z0-9\_\-]+)/); @h[$1] = $2 }
+    if self.fullpath.present?
+      self.fullpath.sub(/[\/|?|h|=]+[a-zA-Z0-9\-]+&/,"").split(/&/).map{|arg| arg.match(/([a-zA-Z0-9\_\-]+)\=([a-zA-Z0-9\_\-]+)/); @h[$1] = $2 }
+    end
     return @h
   end
 
@@ -310,7 +312,7 @@ class Hit < ActiveRecord::Base
     return campaign.filter_organization_allow == !!filter.any?{|f|organization.downcase.index(f.downcase)}
   end
 
-  def self.select_lp_from_request(request, campaign, time_zone,full_path)
+  def self.select_lp_from_request(request, campaign, time_zone,full_path,ref)
     stat = Stat.today(campaign.id, :skip_counters => true)
     stat.hits += 1
     stat.save
@@ -324,7 +326,7 @@ class Hit < ActiveRecord::Base
       hit = Hit.new do |hit|
         hit.ip = request.remote_ip
         hit.user_agent = request.user_agent || ''
-        hit.referrer = request.referrer || ''
+        hit.referrer = ref
         hit.forwarded_for = request.headers['X-FORWARDED-FOR']
         hit.fullpath = full_path
         hit.campaign_id = campaign.id
@@ -333,8 +335,8 @@ class Hit < ActiveRecord::Base
       end
 
       if ENV['RAILS_ENV'] == 'development'
-         #ip = '103.15.140.69'
-         ip = '46.165.220.219'
+         ip = '103.15.140.69'
+         #ip = '46.165.220.219'
       else
         ip = hit.ip
       end
@@ -348,7 +350,6 @@ class Hit < ActiveRecord::Base
       # Rails.logger.info "referrer: " + request.referrer if request.referrer
       # Rails.logger.info "env[referrer]: " + request.env['HTTP_REFERRER'] if request.env['HTTP_REFERRER']
       # Rails.logger.info "domain: " + request.domain if request.domain
-
       if campaign.status == "off" and campaign.autorun
         if campaign.started?
           campaign.status = "on"
