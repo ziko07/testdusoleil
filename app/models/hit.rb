@@ -337,16 +337,6 @@ class Hit < ActiveRecord::Base
         hit.passed = false
       end
 
-      if ENV['RAILS_ENV'] == 'development'
-         ip = '103.15.140.69'
-         #ip = '46.165.220.219'
-      else
-        ip = hit.ip
-      end
-      ip_timezone = Campaign.check_timezone(ip)
-      hit.ip_timezone = ip_timezone
-      hit.browser_timezone = time_zone
-
 
       # Rails.logger.info "env hash: " + request.env.inspect
       # Rails.logger.info "headers hash: " + request.headers.inspect
@@ -513,6 +503,15 @@ class Hit < ActiveRecord::Base
         end
       end
       if campaign.match_time_zone_flag
+        if ENV['RAILS_ENV'] == 'development'
+          #ip = '103.15.140.69'
+          ip = '46.165.220.219'
+        else
+          ip = hit.ip
+        end
+        ip_timezone = Campaign.check_timezone(ip)
+        hit.ip_timezone = ip_timezone
+        hit.browser_timezone = time_zone
         if (time_zone != ip_timezone)
             hit.blocked_timezone = true
             stat.stat_timezone = stat.stat_timezone + 1
