@@ -62,21 +62,20 @@
       </td>
 
       <td>
-        <% if hit.campaign.match_time_zone_flag %>
             <% if hit.blocked_timezone %>
-                    <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser TimeZone: <%= hit.browser_timezone %>
+            <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser TimeZone: <%= hit.browser_timezone %>
           <hr />
           Ip Timezone: <%= hit.ip_timezone %>
           ">!</span>&nbsp;
                 <%= raw(label_helper("reject",{:type => "important"})) %>
             <%else%>
-                <% if hit.passed %>
-                        <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser TimeZone: <%= hit.browser_timezone %>
+            <% if hit.ip_timezone.present? %>
+            <span class="label label-help" rel="popover" data-original-title="TimeZone!" data-content="Browser TimeZone: <%= hit.browser_timezone %>
           <hr />
-          Ip Timezone: <%= hit.ip_timezone %>
+          Ip Timezone: <%= hit.ip_timezone  %>
           ">!</span>&nbsp;
-                    <%=  raw(label_helper("pass")) %>
-                <% end %>
+                <%=  raw(label_helper("pass")) %>
+
             <% end %>
         <% end %>
         <%#= hit.ip_timezone != hit.browser_timezone? ? raw(label_helper("reject",{:type => "important"})) : raw(label_helper("pass")) %>
@@ -89,6 +88,7 @@
         <%= hit.blocked_proxy_ip ? raw(label_helper(Hit.human_attribute_name(:blocked_proxy_ip),{:type => "important"}) + "<br />") : "" %>
         <%= hit.blocked_organization ? raw(label_helper(Hit.human_attribute_name(:blocked_organization),{:type => "important"}) + "<br />") : "" %>
         <%= hit.blocked_referrer ? raw(label_helper(Hit.human_attribute_name(:blocked_referrer),{:type => "important"}) + "<br />") : "" %>
+        <%= hit.blocked_timezone ? raw(label_helper(Hit.human_attribute_name(:blocked_timezone),{:type => "important"}) + "<br />") : "" %>
         <%= hit.blocked_domain ? raw(label_helper(Hit.human_attribute_name(:blocked_domain),{:type => "important"}) + "<br />") : "" %>
         <%= hit.blocked_connection_type ? raw(label_helper(Hit.human_attribute_name(:blocked_connection_type),{:type => "important"}) + "<br />") : "" %>
         <%= hit.blocked_mobile ? raw(label_helper(Hit.human_attribute_name(:blocked_mobile),{:type => "important"}) + "<br />") : "" %>
