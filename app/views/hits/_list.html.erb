@@ -66,11 +66,11 @@
           <hr />
           Ip Timezone: <%= hit.ip_timezone %>
           ">!</span>&nbsp;
-        <% if (hit.ip_timezone != hit.browser_timezone) %>
-        <%= raw(label_helper("reject",{:type => "important"})) %>
-        <%else%>
-            <%=  raw(label_helper("pass")) %>
-        <%end%>
+        <% if hit.blocked_timezone %>
+                <%= raw(label_helper("reject",{:type => "important"})) %>
+            <%else%>
+                <%=  raw(label_helper("pass")) %>
+        <% end %>
         <%#= hit.ip_timezone != hit.browser_timezone? ? raw(label_helper("reject",{:type => "important"})) : raw(label_helper("pass")) %>
       </td>
 
