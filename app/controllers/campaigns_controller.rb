@@ -68,8 +68,8 @@ class CampaignsController < AdminController
     @new_campaign = campaign.clone
     # @new_campaign.safe_lp = "http://test.com"
     # @new_campaign.real_lp = "http://test.com"
-    @new_campaign.rekey_from_1 = "kw"    
-    @new_campaign.rekey_to_1 = "kw"    
+    # @new_campaign.rekey_from_1 = "kw"
+    # @new_campaign.rekey_to_1 = "kw"
     @new_campaign.sha1 = ''
     @metro_codes_recent, @metro_codes_not_recent = campaign.all_metro_codes_partition
     if @new_campaign.save
