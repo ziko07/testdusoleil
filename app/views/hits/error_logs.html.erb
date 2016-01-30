@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>
+    Error Logs
+    <small>
+      All Campaigns
+    </small>
+  </h1>
+</div>
+
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+  <th>Id</th>
+  <th>Error</th>
+  <th>Referer</th>
+  <th>Campaign Id</th>
+  <th>Time</th>
+  </thead>
+  <tbody>
+  <% @errors.each do |error| %>
+      <tr>
+        <td><%= error.id %></td>
+        <td><%= error.name %></td>
+        <td><%= error.referer %></td>
+        <td><%= error.campaign_id %></td>
+        <td><%= error.created_at %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

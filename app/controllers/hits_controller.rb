@@ -52,6 +52,10 @@ class HitsController < AdminController
     end
   end
 
+  def error_logs
+    @errors = DusoleilErrors.order('created_at desc').limit(100)
+  end
+
   private
   def redirection_url(lp)
     @campaign.rekeyed_lp(request.fullpath, lp)

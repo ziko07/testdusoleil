@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160118144621) do
+ActiveRecord::Schema.define(:version => 20160126111304) do
 
   create_table "blockips", :force => true do |t|
     t.string "ip"
@@ -111,6 +111,15 @@ ActiveRecord::Schema.define(:version => 20160118144621) do
 
   add_index "campaigns", ["archived"], :name => "index_campaigns_on_archived"
   add_index "campaigns", ["sha1"], :name => "index_campaigns_on_sha1", :unique => true
+
+  create_table "dusoleil_errors", :force => true do |t|
+    t.string   "name"
+    t.integer  "campaign_id"
+    t.datetime "date"
+    t.string   "referer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "geocode_blocks", :force => true do |t|
     t.integer "start_ipnum"

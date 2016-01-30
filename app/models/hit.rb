@@ -526,6 +526,9 @@ class Hit < ActiveRecord::Base
       # stat.cache_it.increment :passed
       stat.save
       return :real_lp
+    rescue Exception => e
+      DusoleilErrors.create(campaign_id: campaign.id, name: e.message, referer: ref)
+        return :safe_lp
     ensure
       hit.save
       REDIS.set(hit_redis_key, hit.id)

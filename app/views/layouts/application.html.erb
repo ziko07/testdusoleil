@@ -58,6 +58,9 @@
             <li>
               <%= link_to 'System Configuration', sysconfigs_path, :class => (controller.controller_name == "sysconfigs" ? "active" : "") %>
             </li>
+            <li>
+              <%= link_to 'Error Logs', error_logs_hits_path %>
+            </li>
           </ul>     
           <div class="nav pull-right">
             <span class="label label-info ">Current time: <%= formatted(DateTime.now) %></span>
