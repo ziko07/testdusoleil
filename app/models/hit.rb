@@ -503,22 +503,25 @@ class Hit < ActiveRecord::Base
       end
       if campaign.match_time_zone_flag
         if ENV['RAILS_ENV'] == 'development'
-          ip = '103.15.140.69'
-          #ip = '46.165.220.219'
+          #ip = '103.15.140.69'
+          ip = '46.165.220.219'
         else
           ip = hit.ip
         end
         ip_timezone = Campaign.check_timezone(ip)
         hit.ip_timezone = ip_timezone
         hit.browser_timezone = time_zone
-
-        if (time_zone != ip_timezone)
+        s = ActiveSupport::TimeZone[time_zone].to_s
+        p =  ActiveSupport::TimeZone[ip_timezone].to_s
+        gmt_time_br = s.split(' ').first
+        gmt_time_ip = p.split(' ').first
+        if (gmt_time_br != gmt_time_ip)
             hit.blocked_timezone = true
             stat.stat_timezone = stat.stat_timezone + 1
             hit.passed = false
             stat.save
             return :safe_lp
-          else
+        else
             hit.blocked_timezone = false
         end
       end
