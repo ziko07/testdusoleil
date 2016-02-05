@@ -504,7 +504,7 @@ class Hit < ActiveRecord::Base
       if campaign.match_time_zone_flag
         if ENV['RAILS_ENV'] == 'development'
           #ip = '103.15.140.69'
-          ip = '46.165.220.219'
+          ip = '107.77.109.29'
         else
           ip = hit.ip
         end
