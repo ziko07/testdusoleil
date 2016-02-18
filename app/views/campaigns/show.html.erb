@@ -30,7 +30,7 @@
         <% end %>
       </div>
       <div class="span5">
-        <% options = Tracker.domains_with_usage.map{|domain, usage| ["#{domain} (#{usage})", domain]} %>
+        <% options = current_user.trackers.domains_with_usage.map{|domain, usage| ["#{domain} (#{usage})", domain]} %>
         <%= f.label :tracker, "Tracker" %>
         <%= f.select :tracker, options_for_select(options) %>
         <p class="help-block">Tracker is only selectable when creating a new campaign.</p>
