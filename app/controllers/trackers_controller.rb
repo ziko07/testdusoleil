@@ -27,7 +27,7 @@ class TrackersController < ApplicationController
   end
 
   def update
-    if @tracker.update_attributes(params[:trackers])
+    if @tracker.update_attributes(params[:tracker])
       redirect_to(@tracker, :notice => 'Campaign was successfully updated.')
     else
       render :action => "show"
