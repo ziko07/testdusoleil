@@ -26,9 +26,10 @@ class CampaignMailer < ActionMailer::Base
   end
 
 
-  def password_changed(id)
-    @user = User.find(id)
-    mail to: @user.email, subject: "Your password has changed"
+  def password_changed(email,password)
+    @email =  email
+    @password = password
+    mail to: email, subject: "Your password has changed"
   end
 
   def campaign_notification(mail, description, subject, campaign_id)

@@ -28,7 +28,7 @@ ActiveAdmin.register Campaign do
     def new
       redirect_to new_campaign_path
     end
-    end
+  end
 
   # collection_action :create do
   #   redirect_to new_campaign_path

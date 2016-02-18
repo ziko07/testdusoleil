@@ -3,6 +3,22 @@ ActiveAdmin.register User do
   # filter :"email"
   # filter :"is_admin"
 
+  after_create do |user|
+    unless user.errors.any?
+      CampaignMailer.password_changed(user.email,user.password).deliver
+    end
+  end
+
+  after_update do |user|
+     if (params[:user][:password_confirmation].present?)
+       unless user.errors.any?
+         CampaignMailer.password_changed(user.email,user.password).deliver
+       end
+     end
+  end
+
+
+
   index do
     column :id
     column :email
@@ -15,6 +31,7 @@ ActiveAdmin.register User do
     end
   end
 
+
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
@@ -24,6 +41,15 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+
+  # controller do
+  #   # Custom new method
+  #   def create
+  #     puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+  #     puts params
+  #     puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+  #   end
+  # end
 
   member_action :login_as, :method => :get do
     user = User.find(params[:id])
