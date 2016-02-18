@@ -32,6 +32,12 @@ class CampaignMailer < ActionMailer::Base
     mail to: email, subject: "Your password has changed"
   end
 
+  def create_user(email,password)
+    @email =  email
+    @password = password
+    mail to: email, subject: "New account has been created"
+  end
+
   def campaign_notification(mail, description, subject, campaign_id)
     @campaign_id = campaign_id
     @description = description

@@ -5,7 +5,7 @@ ActiveAdmin.register User do
 
   after_create do |user|
     unless user.errors.any?
-      CampaignMailer.password_changed(user.email,user.password).deliver
+      CampaignMailer.create_user(user.email,user.password).deliver
     end
   end
 
