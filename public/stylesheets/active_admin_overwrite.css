@@ -2755,7 +2755,7 @@ body:before {
 }
 
 .instraction-text {
-    width: 30%;
+    width: calc(34% - 50px);
     display: inline-block;
     vertical-align: top;
     padding-bottom: 14px;
@@ -2828,6 +2828,5 @@ body:before {
     float: left;
     font-size: 1em;
     font-weight: bold;
-    padding-top: 8px;
-    width: 7%;
+    width: 60px;
 }
