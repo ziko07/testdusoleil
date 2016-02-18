@@ -1,4 +1,5 @@
-class SysconfigsController < AdminController
+class SysconfigsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /system
   def show
     @sysconfig = Sysconfig.singleton
@@ -45,7 +46,7 @@ class SysconfigsController < AdminController
     dbhandle = sysconfig.connection.raw_connection   # geb raw connection (gets mysql2 client so we can do raw stuff)
     flash[:notice] = ""
     if params[:sync_user_agents]
-      sync_user_agents_sql = "INSERT into user_agents (SELECT DISTINCT '' as id, user_agent as user_agent_string, MD5(user_agent) as user_agent_key, now() as created_at, now() as updated_at from hits) ON DUPLICATE KEY UPDATE updated_at = now()"
+      sync_user_agents_sql = "INSERT into user_agents (SELECT DISTINCT '' as id, user_agent as user_agent_string, MD5(user_agent) as user_agent_key, now() as created_at, now() as updated_at, campaigns.user_id as user_id  from hits inner join campaigns on hits.campaign_id = campaigns.id) ON DUPLICATE KEY UPDATE updated_at = now(),user_id = campaigns.user_id"
       dbhandle.query(sync_user_agents_sql)
       flash[:notice] += "User Agents were synced and #{dbhandle.affected_rows} records were affected."
     end
@@ -140,7 +141,7 @@ class SysconfigsController < AdminController
   def add_ban_agent
     hit = Hit.select("user_agent, ip").where(user_agent:params[:ban_agent]).first
     if hit.present?
-      Blockip.create(:ip => hit.ip, :source => 'sysconfig')
+      Blockip.create(:ip => hit.ip, :source => 'sysconfig',user_id: hit.campaign.user_id)
       notice = "This useragent '#{params[:ban_agent].strip}' has been banned."
     else
       notice = "Can't find this useragent"
@@ -191,7 +192,7 @@ class SysconfigsController < AdminController
     else
       
       if hit.present?
-        Blockip.create(:ip => hit.ip, :source => 'sysconfig')
+        Blockip.create(:ip => hit.ip, :source => 'sysconfig',user_id: hit.campaign.user_id)
         notice = "This useragent '#{ban_agent.strip}' has been banned."
       end
       if file_data.present?

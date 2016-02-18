@@ -1,16 +1,22 @@
-class CampaignsController < AdminController
+class CampaignsController < ApplicationController
   before_filter :get_campaign,        :except => [:new, :create, :index, :autocomplete, :campaign_clone]
   before_filter :get_system_hit_info, :except => [:new, :create, :autocomplete, :campaign_clone]
   before_filter :get_campaign_info,   :except => [:new, :create, :index, :autocomplete, :campaign_clone]
   attr_accessor :browser_time, :ip_time
+  before_filter :authenticate_user!
 
   # GET /campaigns
   def index
     params[:c]  &= Campaign::CREATORS
     params[:t]  &= Tracker.all_domains
     params[:s]  &= ["on","off"]
-    params[:tt] &= Campaign::TRAFFIC_TYPE_VALUES    
-    scope = Campaign.where(:archived => false)
+    params[:tt] &= Campaign::TRAFFIC_TYPE_VALUES
+    if current_user.is_admin
+      scope = Campaign.where(:archived => false)
+    else
+      scope = current_user.campaigns.where(:archived => false)
+    end
+
 
     if params[:key] == params[:key].to_i.to_s
       scope = scope.where(id:params[:key])
@@ -82,7 +88,7 @@ class CampaignsController < AdminController
 
   # POST /campaigns
   def create
-    @campaign = Campaign.new(params[:campaign])
+    @campaign = current_user.campaigns.new(params[:campaign])
     if ((params[:campaign][:ip_timezone].present?) && params[:campaign][:browser_timezone].present? )
       if(params[:campaign][:ip_timezone].downcase == params[:campaign][:browser_timezone].downcase)
         @campaign.match_timezone = true
@@ -173,7 +179,11 @@ class CampaignsController < AdminController
   protected
   
   def get_campaign
-    @campaign = Campaign.cache_it.find :id => params[:id].to_i
+    if current_user.is_admin
+      @campaign = Campaign.cache_it.find :id => params[:id].to_i
+    else
+      @campaign = current_user.campaigns.cache_it.find :id => params[:id].to_i
+    end
   end
   
   def get_system_hit_info

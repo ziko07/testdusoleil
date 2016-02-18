@@ -2,6 +2,7 @@ require 'enumerable.rb'
 
 class Tracker < ActiveRecord::Base
   has_many :campaigns, :foreign_key => :tracker, :primary_key => :domain
+  belongs_to :user
 
   validates :domain, :presence => true
   validates :ip, :presence => true

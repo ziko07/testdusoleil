@@ -1,8 +1,13 @@
-class HitCountsController < AdminController
+class HitCountsController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
-    @hit_counts = HitCount.includes(:user_agent).order("hits_total DESC").limit(100)
-    @show_campaign_id_column = true
+    if current_user.is_admin
+      @hit_counts = HitCount.includes(:user_agent).order("hits_total DESC").limit(100)
+      @show_campaign_id_column = true
+    else
+
+    end
   end
 
   def block

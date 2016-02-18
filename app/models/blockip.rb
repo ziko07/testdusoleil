@@ -32,7 +32,7 @@ class Blockip < ActiveRecord::Base
     Rails.cache.increment("dusoleil.blockips.gen")
   end
 
-  def self.blocked?(ip)
+  def self.blocked?(ip,user_id= '')
     # unless @@gen == (gen = Rails.cache.read("dusoleil.blockips.gen", :raw => true))
     #   @@gen = gen
     #   @@ips = Rails.cache.fetch("dusoleil.blockips/#@@gen") do
@@ -42,8 +42,13 @@ class Blockip < ActiveRecord::Base
     #   end
     # end
     # return @@ips.include?(ip)
-    ip = Blockip.connection.select_values("select ip from blockips where ip = '#{ip}'").last
-    ip.present?    
+    if user_id != ''
+      ip = Blockip.connection.select_values("select ip from blockips where ip = '#{ip}' and user_id = '#{user_id}'").last
+    else
+      ip = Blockip.connection.select_values("select ip from blockips where ip = '#{ip}'").last
+    end
+    return ip.present?
+
   end
 
   def self.destroy_ips(blockips)

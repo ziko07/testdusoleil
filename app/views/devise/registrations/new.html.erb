@@ -1,0 +1,19 @@
+<div class="singIn">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+  <%= f.email_field :email ,:placeholder => 'Email'%>
+  </div>
+  <div>
+  <%= f.password_field :password,:placeholder => 'Password' %>
+  </div>
+  <div>
+  <%= f.password_field :password_confirmation,:placeholder => 'Confirm Passwor' %>
+  </div>
+
+  <div><%= f.submit "Sign up",class: "pull-right margin-right" %></div>
+<% end %>
+  <%= render :partial => "devise/shared/links" %>
+ </div>
+

@@ -1,16 +1,21 @@
-class HitsController < AdminController
-  skip_before_filter :authenticate, :only => [:create,:check_hit]
-
+class HitsController < ApplicationController
+  # skip_before_filter :authenticate!, :only => [:create,:check_hit]
+  skip_before_filter :authenticate_user!, :only => [:create, :check_hit]
   # GET /hits
   def index
-    @hits = Hit.order('created_at desc, passed desc').limit(100)
-    @show_campaign_id_column = true
+    if current_user.is_admin
+      @hits = Hit.order('created_at desc, passed desc').limit(100)
+      @show_campaign_id_column = true
+    else
+      @hits = Hit.where(campaign_id: current_user.campaigns.map(&:id)).order('created_at desc, passed desc').limit(100)
+      @show_campaign_id_column = true
+    end
   end
 
   # POST /hits/ban/1
   def ban
     @hit = Hit.where(:id => params[:id]).first
-    Blockip.create(:ip => @hit.ip, :source => 'hit')
+    Blockip.create(:ip => @hit.ip, :source => 'hit', user_id: @hit.campaign.user_id)
     if params[:campaign_id]
       redirect_to hits_campaign_path(params[:campaign_id]), :notice => "The IP '#{@hit.ip}' has been banned."
     else
@@ -36,8 +41,8 @@ class HitsController < AdminController
         format.html { return redirect_to redirection_url(lp) }
         format.js { return render :inline => (lp == :real_lp ? "top.location.replace('#{redirection_url(lp)}')" : "") }
       end
+      return render :text => nil, :layout => false unless @campaign
     end
-    return render :text => nil, :layout => false unless @campaign
   end
 
   def check_hit

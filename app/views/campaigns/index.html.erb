@@ -90,6 +90,7 @@
 <% end %>
 <table class="table table-bordered table-striped table-condensed" id="campaign_list">
   <thead>
+    <th style="width: 35px;" >Serial</th>
     <th style="width:35px;text-align:center;cursor:pointer;" class="<%= params[:sort_option].present? ? params[:sort_option] : 'sorting'%>">ID</th>
     <th style="width:90px">Actions</th>
     <th style="width:60px">Status</th>
@@ -101,8 +102,9 @@
     <th>Landing Page URLs <span class="label label-help" rel="popover" data-original-title="Key" data-content="<span class='label'>R</span> Real Landing Page<br /><span class='label'>S</span> Safe Landing Page" data-html="true">?</span></th>
   </thead>
   <tbody>
-  <% @campaigns.each do |campaign| %>
+  <% @campaigns.each_with_index do |campaign,i| %>
     <tr>
+      <td><%=  i + 1  %></td>
       <td style="text-align:center; vertical-align:middle;">
         <% #raw('%3d' % campaign.id).gsub(/[\s]/,'&nbsp;') %>        
         <span class="label label-important" rel="popover" style="background-color:transparent;color:black;font-size:14px;font-weight:400;" data-original-title="Campaign Info!" data-content="Campaign ID: <%= campaign.id %>

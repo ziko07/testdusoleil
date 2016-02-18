@@ -1,0 +1,26 @@
+  <div class="tracker-inputs">
+    <%= active_admin_form_for resource, :html => {:class => "new-tracker-form"} do |f| %>
+        <%= f.input :domain %>
+        <%= f.input :ip %>
+        <%= f.input :user_id, :label => 'Member', :as => :select, :collection => User.all.map{|u| [u.email, u.id]} %>
+        <%= f.actions  %>
+    <% end %>
+  </div>
+  <div class="instraction-text ">
+    <h3>Add a new Domain</h3>
+    <p>
+      Add Domain - example.com
+      </br>
+      Add IP -  65.55.130.367
+</p>
+ <p>
+Be sure to update the domain registrar to reflect:
+ </p>
+ <p>
+Type: A Record, Host: @, Value: 65.55.130.367
+   </p>
+<p>
+    Type: A Record, Host: www, Value: 65.55.130.367
+
+    </p>
+  </div>

@@ -21,9 +21,13 @@
   <% if @campaign.new_record? %>
     <div class="row">
       <div class="span5">
-        <%= f.label :creator %>
-        <%= f.select :creator, options_for_select(Campaign::CREATORS.map{|user| [user.capitalize, user]}) %>
-        <p class="help-block">Creator is only selectable when creating a new campaign.</p>
+        <% if current_user.is_admin  %>
+            <%= f.label :creator %>
+            <%= f.select :creator, options_for_select(Campaign::CREATORS.map{|user| [user.capitalize, user]}) %>
+            <p class="help-block">Creator is only selectable when creating a new campaign.</p>
+        <% else %>
+            <%= f.hidden_field :creator, value: current_user.email  %>
+        <% end %>
       </div>
       <div class="span5">
         <% options = Tracker.domains_with_usage.map{|domain, usage| ["#{domain} (#{usage})", domain]} %>
@@ -140,7 +144,7 @@
         <h3 class="alert-heading">Text & Email Notification</h3>
         <p>
           <strong></strong>
-          ext message or email notification is sent when: 
+          Text message or email notification is sent when:
           <br/>
           a. 
           <br/>

@@ -1,5 +1,5 @@
 require 'ipaddr'
-
+require 'digest/md5'
 class Hit < ActiveRecord::Base
   cache_it do |c|
     c.index :ip, :campaign_id
@@ -40,7 +40,7 @@ class Hit < ActiveRecord::Base
   end
 
   def banned?
-    result = Blockip.blocked?(self.ip)
+    result = Blockip.blocked?(self.ip,self.campaign.user_id)
     return result
   end
 
@@ -90,24 +90,33 @@ class Hit < ActiveRecord::Base
 
     dbhandle = self.connection.raw_connection # geb raw connection (gets mysql2 client so we can do raw stuff)
 
-    ua = UserAgent.new                        # start with UserAgent instance
-    ua_params = Hash.new("")                  # create hash for columns/values that defaults to "" (avoids errors in SQL command)
-    ua_params = ua.serializable_hash          # split the model into a hash so we can all of the column names
+    # ua = UserAgent.new                        # start with UserAgent instance
+    # ua_params = Hash.new("")                  # create hash for columns/values that defaults to "" (avoids errors in SQL command)
+    # ua_params = ua.serializable_hash          # split the model into a hash so we can all of the column names
+    #
+    # ua_params['user_agent_string'] = ( '"' + self.user_agent + '"' )
+    # ua_params['user_agent_key']    = ( 'MD5("' + self.user_agent + '")' )   # using MYSQL to create MD5 hash
+    # ua_params['created_at']        = 'now()'
+    # ua_params['updated_at']        = 'now()'
+    #
+    # # UserAgent SQL
+    # ua_sql =  'INSERT into user_agents '                         # This will create a new user agent if no match is found (only first time)
+    # ua_sql += '(' + ua_params.keys.join(",")  + ') '             # -- adds all column names into column array
+    # ua_sql += 'VALUES (' + ua_params.values.join(",") + ') '     # -- adds related values into value array
+    # ua_sql += 'ON DUPLICATE KEY UPDATE '                         # if matching record exists (unique user_agent_key)... then
+    # ua_sql += 'updated_at=' + ua_params['updated_at']            # -- update the updated_at field
+    #
+    # dbhandle.query(ua_sql)                         # run the query
+    # ua_id = dbhandle.last_id                       # grab the ID of the match (or new record)
 
-    ua_params['user_agent_string'] = ( '"' + self.user_agent + '"' )
-    ua_params['user_agent_key']    = ( 'MD5("' + self.user_agent + '")' )   # using MYSQL to create MD5 hash
-    ua_params['created_at']        = 'now()'
-    ua_params['updated_at']        = 'now()'
-
-    # UserAgent SQL
-    ua_sql =  'INSERT into user_agents '                         # This will create a new user agent if no match is found (only first time)
-    ua_sql += '(' + ua_params.keys.join(",")  + ') '             # -- adds all column names into column array
-    ua_sql += 'VALUES (' + ua_params.values.join(",") + ') '     # -- adds related values into value array
-    ua_sql += 'ON DUPLICATE KEY UPDATE '                         # if matching record exists (unique user_agent_key)... then
-    ua_sql += 'updated_at=' + ua_params['updated_at']            # -- update the updated_at field
-
-    dbhandle.query(ua_sql)                         # run the query
-    ua_id = dbhandle.last_id                       # grab the ID of the match (or new record)
+    user_agent = UserAgent.where(user_agent_key:  Digest::MD5.hexdigest(self.user_agent)  , user_id: self.campaign.user_id).first
+    if user_agent.present?
+      user_agent.updated_at = Time.now
+      user_agent.save
+    else
+      user_agent = UserAgent.create(user_agent_key: Digest::MD5.hexdigest(self.user_agent) , user_id: self.campaign.user_id,user_agent_string: ( '"' + self.user_agent + '"' ),created_at: Time.now,updated_at: Time.now)
+    end
+    ua_id = user_agent.id
 
     return false unless ( ua_id > 0  )        # if we don't have a ua_id, then something must have gone wrong and there's no point in moving forward (and we shouldn't block)
     return false unless ( campaign_id > 0  )  # if we don't have a campaign_id, there's no point in moving forward (and we shouldn't block)
@@ -134,7 +143,7 @@ class Hit < ActiveRecord::Base
     hc_id = dbhandle.last_id                       # grab hit_count ID
 
     # Now... is it blocked?
-    blocked = dbhandle.query('select IF(blocked = 1,1,NULL) as blocked from hit_counts where id=' + hc_id.to_s).first[0]
+    blocked  = dbhandle.query('select IF(blocked = 1,1,NULL) as blocked from hit_counts where id=' + hc_id.to_s).first[0]
 
     # special case for facebook bots
     blocked = true if self.user_agent =~ /(facebook|centos)/i
@@ -350,7 +359,7 @@ class Hit < ActiveRecord::Base
           campaign.save
           CampaignMailer.notification(campaign,0) if campaign.email_notification
         else
-          Blockip.create(:ip => hit.ip, :source => 'autorun')
+          Blockip.create(:ip => hit.ip, :source => 'autorun',user_id: hit.campaign.user_id)
           return :safe_lp
         end
       end
@@ -362,7 +371,7 @@ class Hit < ActiveRecord::Base
       stat.save
       # stat.cache_it.increment :analyzed
 
-      hit.passed = ! Blockip.blocked?(hit.ip)
+      hit.passed = ! Blockip.blocked?(hit.ip,hit.campaign.user_id)
       unless hit.passed
         hit.blocked_ip = true
         stat.blocked_ip += 1
@@ -371,7 +380,7 @@ class Hit < ActiveRecord::Base
         return :safe_lp
       end
 
-      hit.passed &&= ! Blockip.blocked?(hit.forwarded_for)
+      hit.passed &&= ! Blockip.blocked?(hit.forwarded_for,hit.campaign.user_id)
       unless hit.passed
         hit.blocked_proxy_ip = true
         stat.blocked_proxy_ip += 1
@@ -383,7 +392,7 @@ class Hit < ActiveRecord::Base
       hit.passed &&= ! hit.user_agent_blocked?
       unless hit.passed
         hit.blocked_user_agent = true
-        Blockip.create(:ip => hit.ip, :source => 'useragent')
+        Blockip.create(:ip => hit.ip, :source => 'useragent',user_id: hit.campaign.user_id)
         # TODO stat.cache_it.increment :blocked_user_agent
         stat.save
 
@@ -503,8 +512,8 @@ class Hit < ActiveRecord::Base
       end
       if campaign.match_time_zone_flag
         if ENV['RAILS_ENV'] == 'development'
-          #ip = '103.15.140.69'
-          ip = '107.77.109.29'
+          # ip = '103.15.140.69'
+          ip = '166.171.248.221'
         else
           ip = hit.ip
         end

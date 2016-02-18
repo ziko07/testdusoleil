@@ -1,8 +1,12 @@
-class TrackersController < AdminController
+class TrackersController < ApplicationController
   before_filter :get_tracker, :except => [:index, :new, :create]
-  
+  before_filter :authenticate_user!
   def index
-    @trackers = Tracker.all
+    if current_user.is_admin
+      @trackers = Tracker.all
+    else
+      @trackers = current_user.trackers
+    end
   end
 
   def new
@@ -14,17 +18,16 @@ class TrackersController < AdminController
   end
 
   def create
-    puts()
     @tracker = Tracker.new(params[:tracker])
     if @tracker.save
-      redirect_to(@tracker, :notice => 'Tracker was successfully created.')
+      redirect_to(admin_trackers_path, :notice => 'Tracker was successfully created.')
     else
       render :action => "show"
     end
   end
 
   def update
-    if @tracker.update_attributes(params[:tracker])
+    if @tracker.update_attributes(params[:trackers])
       redirect_to(@tracker, :notice => 'Campaign was successfully updated.')
     else
       render :action => "show"
