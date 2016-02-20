@@ -44,6 +44,7 @@ Dusoleil::Application.configure do
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
+  config.serve_static_assets = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
@@ -57,7 +58,7 @@ Dusoleil::Application.configure do
     :authentication => 'plain',
     :enable_starttls_auto => true}
  
-  config.action_mailer.default_url_options = {:host => 'http://hubtrack.pw'}
+  config.action_mailer.default_url_options = {:host => 'www.zerofraudscience.com'}
 
   ENV["REDISTOGO_URL"] = 'http://127.0.0.1:6379/'
 end
