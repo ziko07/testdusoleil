@@ -4961,11 +4961,15 @@ div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-faceb
 }
 
 .singIn {
-    width: 20%;
+    width: 30%;
     padding: auto;
     margin: auto;
     margin-top: 10%;
 }
-.margin-right {
-    margin-right: 35px;
+
+.singIn #user_email {
+    width: 100% !important;
+}
+.singIn #user_password {
+    width: 100% !important;
 }
